@@ -1,11 +1,8 @@
 {
   "hosting": {
+    "site": "bendoylegray-hub-site-10593",
     "public": ".",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",
