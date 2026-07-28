@@ -1,0 +1,615 @@
+/* ============================================================
+   bendoylegray.com
+   Plain CSS. No build step, no preprocessor, no dependencies.
+   Palette and tilt live in :root — change them there.
+   ============================================================ */
+
+:root {
+  /* darkroom palette. --amber sits on the negatives;
+     --amber-ink is the on-paper equivalent, dark enough to read. */
+  --bench: #cfd1ca;
+  --paper: #e4e5e0;
+  --paper-edge: #d3d5ce;
+  --ink: #191a16;
+  --ink-soft: #33352e;
+  --neg: #22231e;
+  --neg-hi: #2c2e27;
+  --rebate: #141410;
+  --sprocket: #3a3b34;
+  --muted: #83867b;
+  --muted-lo: #9ea196;
+  --amber: #e0a828;
+  --amber-ink: #8a6410;
+  --china-red: #ad2b10;
+
+  --display: "Big Shoulders Display", Impact, sans-serif;
+  --body: "Newsreader", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --gut: clamp(1.25rem, 4vw, 3.5rem);
+
+  /* how badly each strip was laid down.
+     past about 1.2deg it stops reading as a hand. */
+  --tilt-a: -0.8deg;
+  --tilt-b: 0.65deg;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bench);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: clamp(1rem, 0.95rem + 0.2vw, 1.0625rem);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  padding: clamp(0.75rem, 2.5vw, 2.25rem);
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--amber-ink);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- the sheet of paper ---------- */
+
+.paper {
+  max-width: 73.75rem;
+  margin: 0 auto;
+  background: var(--paper);
+  padding: clamp(1.5rem, 3vw, 2.25rem) var(--gut) clamp(1.5rem, 3vw, 2rem);
+  box-shadow:
+    0 1px 2px rgba(20, 20, 16, 0.1),
+    0 12px 32px rgba(20, 20, 16, 0.1);
+  overflow: hidden;
+}
+
+.margin-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem 1.5rem;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.margin-line--foot {
+  margin-top: 1.5rem;
+}
+.margin-line__stock {
+  color: var(--amber-ink);
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3rem);
+  grid-template-columns: minmax(0, 1fr);
+  padding: clamp(2.25rem, 5vw, 3.75rem) 0 clamp(2rem, 4.5vw, 3rem);
+  border-bottom: 1px solid var(--paper-edge);
+}
+
+.hero__side {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+@media (min-width: 900px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+  .hero__lead {
+    align-self: end;
+  }
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.375rem;
+}
+
+.wordmark {
+  margin-bottom: 1.375rem;
+}
+
+.wordmark svg {
+  display: block;
+  width: 100%;
+  max-width: 31rem;
+  height: auto;
+}
+
+.wordmark text {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 96px;
+  fill: var(--ink);
+}
+
+.standfirst {
+  font-size: clamp(1.0625rem, 0.95rem + 0.55vw, 1.375rem);
+  line-height: 1.45;
+  max-width: 34ch;
+  color: var(--ink-soft);
+}
+
+.standfirst em {
+  font-style: italic;
+}
+
+.roles {
+  list-style: none;
+}
+
+.roles li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.875rem;
+  align-items: baseline;
+  padding: 0.625rem 0;
+  border-top: 1px solid var(--paper-edge);
+}
+
+.roles li:last-child {
+  border-bottom: 1px solid var(--paper-edge);
+}
+
+.roles__yr {
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.roles__what {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.0625rem;
+  line-height: 1.1;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.roles__note {
+  display: block;
+  font-family: var(--body);
+  font-size: 0.9375rem;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.4;
+  margin-top: 0.125rem;
+}
+
+/* ---------- the printed frame ---------- */
+/* Deliberately no sprocket rails: the strips below own that device. */
+
+.plate {
+  background: var(--rebate);
+  padding: 0.5625rem;
+  box-shadow: 0 2px 10px rgba(20, 20, 16, 0.18);
+  transform: rotate(0.4deg);
+}
+
+.plate__link {
+  display: block;
+  text-decoration: none;
+}
+
+.plate__window {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--neg);
+}
+
+.plate img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  transition: opacity 0.35s ease;
+}
+
+.plate.is-swapping img {
+  opacity: 0;
+}
+
+.plate__caption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem 0.875rem;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0.5rem 0.125rem 0.125rem;
+  font-family: var(--mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.plate__handle {
+  color: var(--amber);
+}
+
+.plate__advance {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: var(--muted-lo);
+  transition: color 0.2s ease;
+}
+
+.plate__advance:hover {
+  color: var(--amber);
+}
+
+/* no JS, no button */
+.plate:not(.is-ready) .plate__advance {
+  visibility: hidden;
+}
+
+/* ---------- contact sheet ---------- */
+
+.proof-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin: clamp(2.25rem, 5vw, 3.25rem) 0 clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.proof-head h2 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.0625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.proof-head p {
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.proof {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+/* a cut length of negative, laid down by hand */
+.negstrip {
+  background: var(--rebate);
+  padding: 0.5625rem 0;
+  transform: rotate(var(--tilt)) translateX(var(--shift, 0));
+  box-shadow: 0 2px 10px rgba(20, 20, 16, 0.18);
+}
+
+.negstrip--a {
+  --tilt: var(--tilt-a);
+  --shift: -0.4%;
+  width: 99%;
+}
+.negstrip--b {
+  --tilt: var(--tilt-b);
+  --shift: 1.1%;
+  width: 96.5%;
+  align-self: flex-end;
+}
+
+.perf {
+  height: 0.6875rem;
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent 13px,
+    var(--sprocket) 13px,
+    var(--sprocket) 31px,
+    transparent 31px,
+    transparent 44px
+  );
+  background-size: auto 64%;
+  background-position: left center;
+  background-repeat: repeat-x;
+}
+
+.frames {
+  display: flex;
+  gap: 3px;
+  padding: 0.4375rem 0.5625rem;
+}
+
+.frame {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4375rem;
+  padding: 1.125rem 1.125rem 0.9375rem;
+  background: var(--neg);
+  color: var(--paper);
+  text-decoration: none;
+  isolation: isolate;
+  aspect-ratio: 3 / 2;
+  transition: background 0.25s ease;
+}
+
+.frame:hover,
+.frame:focus-visible {
+  background: var(--neg-hi);
+}
+
+.frame__num {
+  font-family: var(--mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.18em;
+  color: var(--amber);
+}
+
+.frame__title {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(1.625rem, 1.25rem + 1.1vw, 2.25rem);
+  line-height: 0.92;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  margin-top: auto;
+}
+
+.frame__blurb {
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: #c6c8be;
+  max-width: 26ch;
+}
+
+.frame__dest {
+  font-family: var(--mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-lo);
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(228, 229, 224, 0.13);
+  transition: color 0.25s ease;
+}
+
+.frame:hover .frame__dest,
+.frame:focus-visible .frame__dest {
+  color: var(--amber);
+}
+
+/* The grease-pencil mark: what you do to a keeper.
+   Stroke properties are set here rather than on the <path>, because
+   <use> pulls the shape into a shadow tree that document CSS can't
+   select into. These are all inherited SVG properties, so they reach
+   the path anyway — and the transition rides the inherited value. */
+.mark {
+  position: absolute;
+  inset: 0.375rem;
+  width: calc(100% - 0.75rem);
+  height: calc(100% - 0.75rem);
+  pointer-events: none;
+  z-index: 2;
+  overflow: visible;
+  fill: none;
+  stroke: var(--china-red);
+  stroke-width: 5.5;
+  stroke-linecap: round;
+  stroke-dasharray: 1024;
+  stroke-dashoffset: 1024;
+  opacity: 0.9;
+  transition: stroke-dashoffset 0.62s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.frame:hover .mark,
+.frame:focus-visible .mark {
+  stroke-dashoffset: 0;
+}
+
+/* ---------- footer ---------- */
+
+.foot {
+  margin-top: clamp(2.25rem, 5vw, 3.25rem);
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--paper-edge);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem 1.5rem;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.foot a {
+  text-decoration: none;
+  border-bottom: 1px solid var(--paper-edge);
+  padding-bottom: 2px;
+}
+
+.foot a:hover {
+  color: var(--ink);
+  border-color: var(--amber-ink);
+}
+
+.foot__made a {
+  border-bottom-color: var(--amber-ink);
+}
+
+/* ---------- held vertically: sprockets down the long edges ---------- */
+
+@media (max-width: 820px) {
+  :root {
+    /* a tall strip swings further at its ends */
+    --tilt-a: -0.35deg;
+    --tilt-b: 0.4deg;
+  }
+
+  .negstrip {
+    display: flex;
+    flex-direction: row;
+    padding: 0 0.5625rem;
+  }
+
+  .negstrip--a {
+    width: 97.5%;
+    --shift: 0;
+  }
+  .negstrip--b {
+    width: 99%;
+    --shift: 0;
+  }
+
+  .perf {
+    flex: 0 0 0.6875rem;
+    width: 0.6875rem;
+    height: auto;
+    align-self: stretch;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 13px,
+      var(--sprocket) 13px,
+      var(--sprocket) 31px,
+      transparent 31px,
+      transparent 44px
+    );
+    background-size: 64% auto;
+    background-position: center top;
+    background-repeat: repeat-y;
+  }
+
+  .frames {
+    flex: 1 1 auto;
+    min-width: 0;
+    flex-direction: column;
+    padding: 0.5625rem 0.4375rem;
+  }
+
+  /* in a column, frames size to their own ratio, not a shared height */
+  .frames > .frame {
+    flex: 0 0 auto;
+  }
+
+  .frame__blurb {
+    max-width: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .margin-line__drop {
+    display: none;
+  }
+  .frame {
+    aspect-ratio: auto;
+    min-height: 11.5rem;
+  }
+  .frame__title {
+    font-size: 1.75rem;
+  }
+  .proof {
+    gap: 2rem;
+  }
+}
+
+/* ---------- develop-in ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .frame {
+    opacity: 0;
+    filter: contrast(0.4) brightness(1.35);
+    animation: develop 0.85s cubic-bezier(0.25, 0.6, 0.3, 1) forwards;
+  }
+  .negstrip--a .frame:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .negstrip--a .frame:nth-child(2) {
+    animation-delay: 0.19s;
+  }
+  .negstrip--a .frame:nth-child(3) {
+    animation-delay: 0.28s;
+  }
+  .negstrip--b .frame:nth-child(1) {
+    animation-delay: 0.37s;
+  }
+  .negstrip--b .frame:nth-child(2) {
+    animation-delay: 0.46s;
+  }
+  .negstrip--b .frame:nth-child(3) {
+    animation-delay: 0.55s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plate img {
+    transition: none;
+  }
+}
+
+@keyframes develop {
+  from {
+    opacity: 0;
+    filter: contrast(0.4) brightness(1.35);
+  }
+  to {
+    opacity: 1;
+    filter: none;
+  }
+}

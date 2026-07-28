@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ben Doyle Gray — Engineer, Writer, Photographer</title>
+    <meta
+      name="description"
+      content="Ben Doyle Gray builds for the web, photographs dogs, and writes about systems that weren't designed for him. Warrenville, Illinois, west of Chicago."
+    />
+    <link rel="canonical" href="https://bendoylegray.com" />
+    <meta name="theme-color" content="#e4e5e0" />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Ben Doyle Gray" />
+    <meta
+      property="og:title"
+      content="Ben Doyle Gray — Engineer, Writer, Photographer"
+    />
+    <meta
+      property="og:description"
+      content="Web development, photography, and essays. Warrenville, Illinois."
+    />
+    <meta property="og:url" content="https://bendoylegray.com" />
+    <meta property="og:image" content="https://bendoylegray.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="The name Ben Doyle Gray set in three stacked lines beside a strip of film negative."
+    />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Ben Doyle Gray — Engineer, Writer, Photographer"
+    />
+    <meta
+      name="twitter:description"
+      content="Web development, photography, and essays. Warrenville, Illinois."
+    />
+    <meta
+      name="twitter:image"
+      content="https://bendoylegray.com/og-image.png"
+    />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100..900&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- The grease-pencil mark, defined once and referenced six times.
+     Stroke properties live on .mark in the CSS so they inherit into <use>. -->
+    <svg width="0" height="0" aria-hidden="true" style="position: absolute">
+      <defs>
+        <symbol id="grease" viewBox="0 0 260 174" preserveAspectRatio="none">
+          <path
+            d="M28 14 C 96 5, 178 8, 234 17 C 250 22, 250 52, 249 94 C 248 129, 251 150, 236 158 C 174 167, 88 169, 24 160 C 10 155, 9 122, 10 87 C 11 50, 8 23, 28 14 C 60 9, 120 7, 168 10"
+          />
+        </symbol>
+      </defs>
+    </svg>
+
+    <div class="paper">
+      <div class="margin-line">
+        <span class="margin-line__stock">BDG · 400 · Safety film</span>
+        <span class="margin-line__drop">Warrenville, Illinois</span>
+      </div>
+
+      <header class="hero">
+        <div class="hero__lead">
+          <p class="eyebrow">One person / several filing systems</p>
+
+          <h1 class="sr-only">Ben Doyle Gray</h1>
+          <div class="wordmark" aria-hidden="true">
+            <svg id="wm" viewBox="0 0 300 232">
+              <text x="0" y="70">BEN</text>
+              <text x="0" y="148">DOYLE</text>
+              <text x="0" y="226">GRAY</text>
+            </svg>
+          </div>
+
+          <p class="standfirst">
+            I build things on the web, take pictures of other people's dogs and
+            cats, and write about systems that were designed with someone else
+            in mind.
+            <em>Pick a frame.</em>
+          </p>
+        </div>
+
+        <div class="hero__side">
+          <figure class="plate" id="plate">
+            <a
+              class="plate__link"
+              id="plate-link"
+              href="https://instagram.com/ben.atlarge"
+              target="_blank"
+              rel="noopener"
+            >
+              <div class="plate__window">
+                <img
+                  id="plate-img"
+                  src="photos/rainbow-skull.jpg"
+                  width="640"
+                  height="480"
+                  fetchpriority="high"
+                  decoding="async"
+                  alt="Photo of a multi-colored plastic skull"
+                />
+              </div>
+            </a>
+            <figcaption class="plate__caption">
+              <span class="plate__handle">&commat;ben.atlarge</span>
+              <button class="plate__advance" type="button" id="plate-advance">
+                Next frame &rarr;
+              </button>
+            </figcaption>
+
+            <!-- Edit this list to change the photos. Nothing else to touch. -->
+            <script type="application/json" id="plate-data">
+              [
+                {
+                  "src": "photos/rainbow-skull.jpg",
+                  "alt": "Photo of a multi-colored plastic skull",
+                  "permalink": "https://instagram.com/ben.atlarge"
+                },
+                {
+                  "src": "photos/aphie.jpg",
+                  "alt": "Photo of a summer camp",
+                  "permalink": "https://instagram.com/ben.atlarge"
+                },
+                {
+                  "src": "photos/derby.jpg",
+                  "alt": "Photo of my cat Derby",
+                  "permalink": "https://instagram.com/ben.atlarge"
+                },
+                {
+                  "src": "photos/loki.jpg",
+                  "alt": "Photo of my cat Loki",
+                  "permalink": "https://instagram.com/ben.atlarge"
+                },
+                {
+                  "src": "photos/lucy-maggie.jpg",
+                  "alt": "Photo of my two dogs",
+                  "permalink": "https://instagram.com/ben.atlarge"
+                },
+                {
+                  "src": "photos/tables.jpg",
+                  "alt": "Photo of tables from top down",
+                  "permalink": "https://instagram.com/ben.atlarge"
+                },
+                {
+                  "src": "photos/darth-pepper-motion.jpg",
+                  "alt": "Photo of darth vader and a pepper",
+                  "permalink": "https://instagram.com/ben.atlarge"
+                },
+                {
+                  "src": "photos/emergence.jpg",
+                  "alt": "Photo of a pink flower",
+                  "permalink": "https://instagram.com/ben.atlarge"
+                },
+                {
+                  "src": "photos/pebble.jpg",
+                  "alt": "Photo of an art project with clay",
+                  "permalink": "https://instagram.com/ben.atlarge"
+                },
+                {
+                  "src": "photos/mercedes-stadium.jpg",
+                  "alt": "Photo of mercedes benz stadium",
+                  "permalink": "https://instagram.com/ben.atlarge"
+                },
+                {
+                  "src": "photos/waffle-house.jpg",
+                  "alt": "Photo of waffle house sign",
+                  "permalink": "https://instagram.com/ben.atlarge"
+                }
+              ]
+            </script>
+          </figure>
+
+          <ul class="roles">
+            <li>
+              <span class="roles__yr">2025—??</span>
+              <span class="roles__what"
+                >Writer
+                <span class="roles__note"
+                  >Diagnosed at 43. Started writing about it at 46.</span
+                >
+              </span>
+            </li>
+            <li>
+              <span class="roles__yr">2022—??</span>
+              <span class="roles__what"
+                >Photographer
+                <span class="roles__note"
+                  >Mostly dogs. They're better subjects than we are.</span
+                >
+              </span>
+            </li>
+            <li>
+              <span class="roles__yr">2013—24</span>
+              <span class="roles__what"
+                >Software engineer &amp; engineering manager
+                <span class="roles__note"
+                  >Thirteen years of shipping, and of managing people who
+                  ship.</span
+                >
+              </span>
+            </li>
+            <li>
+              <span class="roles__yr">2011—13</span>
+              <span class="roles__what"
+                >Self-taught web developer
+                <span class="roles__note"
+                  >No bootcamp, no CS degree, no regrets worth listing.</span
+                >
+              </span>
+            </li>
+            <li>
+              <span class="roles__yr">2001—09</span>
+              <span class="roles__what"
+                >Youth pastor
+                <span class="roles__note"
+                  >Load-bearing, whether I like it or not.</span
+                >
+              </span>
+            </li>
+          </ul>
+        </div>
+      </header>
+
+      <div class="proof-head">
+        <h2>Contact sheet</h2>
+        <p>Two strips &middot; six frames &middot; hover to mark one</p>
+      </div>
+
+      <div class="proof">
+        <nav class="negstrip negstrip--a" aria-label="Things I make">
+          <div class="perf"></div>
+          <div class="frames">
+            <a class="frame" href="https://codelesstraveled.com">
+              <svg
+                class="mark"
+                viewBox="0 0 260 174"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <use href="#grease" />
+              </svg>
+              <span class="frame__num">1</span>
+              <h3 class="frame__title">Code Less Traveled</h3>
+              <p class="frame__blurb">
+                Web development, a project at a time. Sites that load fast and
+                still work in three years.
+              </p>
+              <span class="frame__dest">Consulting &rarr;</span>
+            </a>
+
+            <a class="frame" href="https://serialpessimist.com">
+              <svg
+                class="mark"
+                viewBox="0 0 260 174"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <use href="#grease" />
+              </svg>
+              <span class="frame__num">1A</span>
+              <h3 class="frame__title">Serial Pessimist</h3>
+              <p class="frame__blurb">
+                Essays on autism, work, and institutions that weren't built for
+                you. Written from inside it.
+              </p>
+              <span class="frame__dest">Substack &rarr;</span>
+            </a>
+
+            <a class="frame" href="https://instagram.com/ben.atlarge">
+              <svg
+                class="mark"
+                viewBox="0 0 260 174"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <use href="#grease" />
+              </svg>
+              <span class="frame__num">2</span>
+              <h3 class="frame__title">ben.atlarge</h3>
+              <p class="frame__blurb">
+                Pet photography around DuPage County. Portraits, shelter work,
+                adoption events.
+              </p>
+              <span class="frame__dest">Instagram &rarr;</span>
+            </a>
+          </div>
+          <div class="perf"></div>
+        </nav>
+
+        <nav class="negstrip negstrip--b" aria-label="Ways to check on me">
+          <div class="perf"></div>
+          <div class="frames">
+            <a class="frame" href="#">
+              <svg
+                class="mark"
+                viewBox="0 0 260 174"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <use href="#grease" />
+              </svg>
+              <span class="frame__num">2A</span>
+              <h3 class="frame__title">Résumé</h3>
+              <p class="frame__blurb">
+                The formal version, for people who need one. Open to engineering
+                and adjacent roles.
+              </p>
+              <span class="frame__dest">PDF &rarr;</span>
+            </a>
+
+            <a class="frame" href="#">
+              <svg
+                class="mark"
+                viewBox="0 0 260 174"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <use href="#grease" />
+              </svg>
+              <span class="frame__num">3</span>
+              <h3 class="frame__title">GitHub</h3>
+              <p class="frame__blurb">
+                Repositories, mostly client work and things I built to avoid
+                doing something else.
+              </p>
+              <span class="frame__dest">github.com &rarr;</span>
+            </a>
+
+            <a class="frame" href="mailto:hello@bendoylegray.com">
+              <svg
+                class="mark"
+                viewBox="0 0 260 174"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <use href="#grease" />
+              </svg>
+              <span class="frame__num">3A</span>
+              <h3 class="frame__title">Email</h3>
+              <p class="frame__blurb">
+                The reliable way to reach me. I answer everything, eventually
+                and in order.
+              </p>
+              <span class="frame__dest">hello@bendoylegray.com &rarr;</span>
+            </a>
+          </div>
+          <div class="perf"></div>
+        </nav>
+      </div>
+
+      <footer class="foot">
+        <span>&copy; <span id="currentYear"></span> Ben Doyle Gray</span>
+        <span class="foot__made"
+          ><a href="#">made by arguing with a language model &rarr;</a></span
+        >
+        <span>
+          <a href="https://linkedin.com/bendoylegray">LinkedIn</a> &middot;
+          <a href="https://bendoylegray.bsky.social">Bluesky</a> &middot;
+          <a href="https://instagram.com/ben.atlarge">Instagram</a>
+        </span>
+      </footer>
+
+      <div class="margin-line margin-line--foot">
+        <span class="margin-line__stock"
+          >&rarr; 1 &middot; 1A &middot; 2 &middot; 2A &middot; 3 &middot;
+          3A</span
+        >
+        <span class="margin-line__drop">Founded 2019</span>
+      </div>
+    </div>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Ben Doyle Gray",
+        "url": "https://bendoylegray.com",
+        "image": "https://bendoylegray.com/og-image.png",
+        "jobTitle": "Software Engineer",
+        "description": "Software engineer, writer, and photographer in Warrenville, Illinois.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Warrenville",
+          "addressRegion": "IL",
+          "addressCountry": "US"
+        },
+        "knowsAbout": [
+          "Web development",
+          "Leadership",
+          "Public speaking",
+          "Software engineering",
+          "Pet photography",
+          "Writing"
+        ],
+        "sameAs": [
+          "https://instagram.com/ben.atlarge",
+          "https://serialpessimist.com",
+          "https://github.com/bengray",
+          "https://www.linkedin.com/bendoylegray"
+        ]
+      }
+    </script>
+
+    <script src="main.js" defer></script>
+  </body>
+</html>

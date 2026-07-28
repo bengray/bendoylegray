@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OG card — screenshot this at 1200×630</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100..900&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,300..500&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#888;display:grid;place-items:center;min-height:100vh}
+  .card{
+    width:1200px;height:630px;background:#e4e5e0;position:relative;overflow:hidden;
+    display:grid;grid-template-columns:1fr 440px;
+  }
+  .left{padding:56px 0 56px 70px;display:flex;flex-direction:column;justify-content:space-between}
+  .stock{font-family:'IBM Plex Mono',monospace;font-size:15px;letter-spacing:.22em;
+         text-transform:uppercase;color:#8a6410}
+  .name svg{display:block;width:560px;height:auto}
+  .name text{font-family:'Big Shoulders Display';font-weight:800;font-size:96px;fill:#191a16}
+  .sub{font-family:'Newsreader',serif;font-size:26px;color:#33352e;margin-bottom:10px}
+  .loc{font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.2em;
+       text-transform:uppercase;color:#83867b}
+  .strip{background:#141410;position:relative;display:flex;flex-direction:column;
+         justify-content:center;gap:40px;padding:0 46px}
+  .strip::before,.strip::after{
+    content:"";position:absolute;top:0;bottom:0;width:18px;
+    background-image:repeating-linear-gradient(to bottom,transparent 0,transparent 14px,
+      #3a3b34 14px,#3a3b34 32px,transparent 32px,transparent 46px);
+  }
+  .strip::before{left:14px}
+  .strip::after{right:14px}
+  .cell{background:#22231e;aspect-ratio:3/2;width:100%}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="left">
+      <div class="stock">BDG · 400 · Safety film</div>
+      <div class="name">
+        <svg id="wm" viewBox="0 0 300 232">
+          <text x="0" y="70">BEN</text>
+          <text x="0" y="148">DOYLE</text>
+          <text x="0" y="226">GRAY</text>
+        </svg>
+      </div>
+      <div>
+        <div class="sub">Engineer · Writer · Photographer</div>
+        <div class="loc">Warrenville, Illinois</div>
+      </div>
+    </div>
+    <div class="strip"><div class="cell"></div><div class="cell"></div></div>
+  </div>
+<script>
+(function(){var s=document.getElementById("wm");function j(){
+var l=[].slice.call(s.querySelectorAll("text")),m=0;
+l.forEach(function(t){var w=t.getComputedTextLength();if(w>m)m=w;});
+if(!m)return;l.forEach(function(t){t.setAttribute("lengthAdjust","spacing");t.setAttribute("textLength",m);});
+var h=232;try{var f=l[0].getBBox(),z=l[l.length-1].getBBox(),c=Math.max(0,-f.y),i=z.y+z.height;
+if(isFinite(i)&&i>0)h=i-c;}catch(e){}
+s.setAttribute("viewBox","0 0 "+m+" "+h);}
+document.fonts&&document.fonts.ready?document.fonts.ready.then(j):window.addEventListener("load",j);})();
+</script>
+</body>
+</html>
