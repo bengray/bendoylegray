@@ -20,7 +20,8 @@
   --muted-lo: #9ea196;
   --amber: #e0a828;
   --amber-ink: #8a6410;
-  --china-red: #ad2b10;
+  /* china marker red — the colour you actually mark a proof sheet with */
+  --china: #bf2f2c;
 
   --display: "Big Shoulders Display", Impact, sans-serif;
   --body: "Newsreader", Georgia, serif;
@@ -30,7 +31,7 @@
 
   /* how badly each strip was laid down.
      past about 1.2deg it stops reading as a hand. */
-  --tilt-a: -0.8deg;
+  --tilt-a: -0.5deg;
   --tilt-b: 0.65deg;
 }
 
@@ -133,7 +134,7 @@ a {
     align-items: start;
   }
   .hero__lead {
-    align-self: end;
+    align-self: start;
   }
 }
 
@@ -335,6 +336,15 @@ a {
   padding: 0.5625rem 0;
   transform: rotate(var(--tilt)) translateX(var(--shift, 0));
   box-shadow: 0 2px 10px rgba(20, 20, 16, 0.18);
+  /* transform makes this a stacking context, so a mark can't escape it
+     without the whole strip lifting */
+  position: relative;
+  z-index: 0;
+}
+
+.negstrip:hover,
+.negstrip:focus-within {
+  z-index: 5;
 }
 
 .negstrip--a {
@@ -369,6 +379,9 @@ a {
   display: flex;
   gap: 3px;
   padding: 0.4375rem 0.5625rem;
+  /* above .perf, so an overshooting mark crosses the sprockets */
+  position: relative;
+  z-index: 1;
 }
 
 .frame {
@@ -382,12 +395,36 @@ a {
   background: var(--neg);
   color: var(--paper);
   text-decoration: none;
-  isolation: isolate;
   aspect-ratio: 3 / 2;
-  transition: background 0.25s ease;
+  transition: background 0s ease;
+
+  /* No isolation here on purpose. The mark overshoots the frame, and
+     `isolation: isolate` would trap it in the frame's own stacking
+     context — clipping it behind neighbouring frames and the sprocket
+     rails. Instead the whole frame lifts while it's active.
+
+     The lift has to OUTLAST the stroke. Frames paint in DOM order, so
+     a mark that spills past its frame's right edge is covered by the
+     frames after it the instant z-index drops back — and the stroke is
+     still retracting for up to --dur after the pointer leaves. So the
+     drop is delayed by exactly that: `z-index 0s linear var(--dur)`.
+     Zero duration, non-zero delay — it snaps, but late. Going the other
+     way the delay is removed, so it lifts instantly. */
+  z-index: 0;
+  transition:
+    background 0s ease,
+    z-index 0s linear var(--dur, 0s);
 }
 
 .frame:hover,
+.frame:focus-within {
+  z-index: 4;
+  background: var(--neg-hi);
+  transition:
+    background 0s ease,
+    z-index 0s;
+}
+
 .frame:focus-visible {
   background: var(--neg-hi);
 }
@@ -425,7 +462,7 @@ a {
   margin-top: auto;
   padding-top: 0.5rem;
   border-top: 1px solid rgba(228, 229, 224, 0.13);
-  transition: color 0.25s ease;
+  transition: color 0s ease;
 }
 
 .frame:hover .frame__dest,
@@ -434,26 +471,86 @@ a {
 }
 
 /* The grease-pencil mark: what you do to a keeper.
-   Stroke properties are set here rather than on the <path>, because
-   <use> pulls the shape into a shadow tree that document CSS can't
-   select into. These are all inherited SVG properties, so they reach
-   the path anyway — and the transition rides the inherited value. */
+   Stroke colour and the dash reveal are set here rather than on the
+   <path>s, because <use> pulls the shape into a shadow tree that
+   document CSS can't select into. These are all inherited SVG
+   properties, so they reach the paths anyway — and the transition
+   rides the inherited value. Per-path width lives in each <symbol>.
+
+   Every frame gets its own mark. They differ in laps, tilt, wobble,
+   pass count and weight, so no two circles look like the same hand.
+   Each centreline is a different length, which the dash animation has
+   to know about — hence --len, set per frame below. If you edit a
+   path, remeasure it: too large and the sweep finishes early and then
+   sits there; too small and the stroke never completes.
+
+   The mark is inset negatively so the loop overshoots the frame and
+   spills onto the rebate, the way a real one does.
+
+   opacity sits here, not on the paths: the passes overlap, and
+   per-path transparency would show the seams. Group opacity is
+   applied once, after compositing. */
 .mark {
+  --len: 1172;
+  --dur: 0.62s;
   position: absolute;
-  inset: 0.375rem;
-  width: calc(100% - 0.75rem);
-  height: calc(100% - 0.75rem);
+  inset: -5%;
+  width: 110%;
+  height: 110%;
   pointer-events: none;
-  z-index: 2;
+  z-index: 3;
   overflow: visible;
   fill: none;
-  stroke: var(--china-red);
-  stroke-width: 5.5;
-  stroke-linecap: round;
-  stroke-dasharray: 1024;
-  stroke-dashoffset: 1024;
+  stroke: var(--china);
+  stroke-dasharray: var(--len);
+  stroke-dashoffset: var(--len);
+  opacity: 0.8;
+  /* fast off the mark, decelerating into the lift — a hand, not a motor */
+  transition: stroke-dashoffset var(--dur) cubic-bezier(0.18, 0.62, 0.28, 1);
+}
+
+/* <symbol> instances clip to their own viewBox — the UA stylesheet sets
+   overflow: hidden on symbol. The marks overshoot the frame on purpose,
+   so that clip has to come off, or the loop gets sliced at the edge.
+   Also set as a presentation attribute on each symbol in index.html. */
+#grease-1,
+#grease-2,
+#grease-3,
+#grease-4,
+#grease-5,
+#grease-6 {
+  overflow: visible;
+}
+
+.mark--1 {
+  --len: 1166;
+  --dur: 0.73s;
+  opacity: 0.88;
+}
+.mark--2 {
+  --len: 726;
+  --dur: 0.58s;
+  opacity: 0.93;
+}
+.mark--3 {
+  --len: 1368;
+  --dur: 0.8s;
+  opacity: 0.84;
+}
+.mark--4 {
+  --len: 939;
+  --dur: 0.65s;
   opacity: 0.9;
-  transition: stroke-dashoffset 0.62s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.mark--5 {
+  --len: 1013;
+  --dur: 0.68s;
+  opacity: 0.86;
+}
+.mark--6 {
+  --len: 834;
+  --dur: 0.62s;
+  opacity: 0.94;
 }
 
 .frame:hover .mark,
