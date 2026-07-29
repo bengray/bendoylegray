@@ -1,4 +1,4 @@
-bendoylegray.com
+bendoylegray.com v2.0.0
 ================
 
 Three files and a folder of photos. No build step, no dependencies,

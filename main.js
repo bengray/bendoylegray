@@ -36,15 +36,6 @@
        or a change of typeface. */
     var height = 232;
 
-    try {
-      var first = lines[0].getBBox();
-      var last = lines[lines.length - 1].getBBox();
-      var ink = last.y + last.height;
-      if (isFinite(ink) && ink > 0) height = ink - 28;
-    } catch (e) {
-      /* getBBox can throw if the node isn't rendered yet; keep the default */
-    }
-
     svg.setAttribute("viewBox", "0 0 " + max + " " + height);
   }
 
@@ -66,10 +57,6 @@
   var link = document.getElementById("plate-link");
   var button = document.getElementById("plate-advance");
   var data = document.getElementById("plate-data");
-  var copyrightYear = document.getElementById("current-year");
-
-  copyrightYear.textContent = new Date().getFullYear();
-
   if (!plate || !img || !data) return;
 
   var photos;
