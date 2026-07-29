@@ -104,22 +104,22 @@ a {
   left: 0;
   top: 0;
   margin-left: -208px;
-  margin-top: 300px;
+  margin-top: 480px;
 }
 
 /* iPhone in portrait */
 @media (min-width: 640px) {
   .margin-line-head {
     margin-left: -265px;
-    margin-top: 380px;
+    margin-top: 680px;
   }
 }
 
-/* iPhone in landscape */
+/* iPhone in landscape and desktop */
 @media (min-width: 1024px) {
   .margin-line-head {
     margin-left: -110px;
-    margin-top: 380px;
+    margin-top: 680px;
   }
 }
 
@@ -155,7 +155,6 @@ a {
   display: flex;
   flex-direction: column;
   gap: clamp(1.25rem, 3vw, 2rem);
-  padding: clamp(1.5rem, 3vw, 2.25rem);
   margin: 50px 0 0;
 }
 
