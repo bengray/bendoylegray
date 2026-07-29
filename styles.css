@@ -103,22 +103,26 @@ a {
   position: absolute;
   left: 0;
   top: 0;
-  margin-left: -208px;
+  margin-left: -233px;
   margin-top: 480px;
+}
+
+.info {
+  padding-right: 25px;
 }
 
 /* iPhone in portrait */
 @media (min-width: 640px) {
   .margin-line-head {
-    margin-left: -265px;
-    margin-top: 680px;
+    margin-left: -300px;
+    margin-top: 600px;
   }
 }
 
 /* iPhone in landscape and desktop */
 @media (min-width: 1024px) {
   .margin-line-head {
-    margin-left: -110px;
+    margin-left: -150px;
     margin-top: 680px;
   }
 }
