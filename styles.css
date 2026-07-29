@@ -35,10 +35,19 @@
   --tilt-b: 0.65deg;
 }
 
-*, *::before, *::after { box-sizing: border-box; }
-* { margin: 0; padding: 0; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
 
-html { -webkit-text-size-adjust: 100%; }
+html {
+  -webkit-text-size-adjust: 100%;
+}
 
 body {
   background: var(--bench);
@@ -50,7 +59,9 @@ body {
   padding: clamp(0.75rem, 2.5vw, 2.25rem);
 }
 
-a { color: inherit; }
+a {
+  color: inherit;
+}
 
 :focus-visible {
   outline: 2px solid var(--amber-ink);
@@ -75,15 +86,45 @@ a { color: inherit; }
   max-width: 73.75rem;
   margin: 0 auto;
   background: var(--paper);
-  padding: clamp(1.5rem, 3vw, 2.25rem) var(--gut) clamp(1.5rem, 3vw, 2rem);
-  box-shadow: 0 1px 2px rgba(20, 20, 16, 0.1), 0 12px 32px rgba(20, 20, 16, 0.1);
+  padding: 0 var(--gut) clamp(1.5rem, 3vw, 2rem);
+  box-shadow:
+    0 1px 2px rgba(20, 20, 16, 0.1),
+    0 12px 32px rgba(20, 20, 16, 0.1);
   overflow: hidden;
 }
 
-.margin-line {
+.margin-line-head {
+  font-family: var(--mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transform: rotate(-90deg);
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: -208px;
+  margin-top: 300px;
+}
+
+/* iPhone in portrait */
+@media (min-width: 640px) {
+  .margin-line-head {
+    margin-left: -265px;
+    margin-top: 380px;
+  }
+}
+
+/* iPhone in landscape */
+@media (min-width: 1024px) {
+  .margin-line-head {
+    margin-left: -110px;
+    margin-top: 380px;
+  }
+}
+
+.margin-line-foot {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.375rem 1.5rem;
   justify-content: space-between;
   font-family: var(--mono);
   font-size: 0.5625rem;
@@ -92,8 +133,13 @@ a { color: inherit; }
   color: var(--muted);
 }
 
-.margin-line--foot { margin-top: 1.5rem; }
-.margin-line__stock { color: var(--amber-ink); }
+.margin-line--foot {
+  margin-top: 1.5rem;
+  transform: none;
+}
+.margin-line__stock {
+  color: var(--amber-ink);
+}
 
 /* ---------- hero ---------- */
 
@@ -101,7 +147,7 @@ a { color: inherit; }
   display: grid;
   gap: clamp(1.75rem, 4vw, 3rem);
   grid-template-columns: minmax(0, 1fr);
-  padding: clamp(2.25rem, 5vw, 3.75rem) 0 clamp(2rem, 4.5vw, 3rem);
+  padding: 0 0 clamp(2rem, 4.5vw, 3rem);
   border-bottom: 1px solid var(--paper-edge);
 }
 
@@ -109,6 +155,8 @@ a { color: inherit; }
   display: flex;
   flex-direction: column;
   gap: clamp(1.25rem, 3vw, 2rem);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  margin: 50px 0 0;
 }
 
 @media (min-width: 900px) {
@@ -116,7 +164,10 @@ a { color: inherit; }
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     align-items: start;
   }
-  .hero__lead { align-self: end; }
+  .hero__lead {
+    align-self: start;
+    margin-top: -42px; /* ... perfecttion */
+  }
 }
 
 .eyebrow {
@@ -125,10 +176,12 @@ a { color: inherit; }
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 1.375rem;
+  /* margin-bottom: 1.375rem; */
 }
 
-.wordmark { margin-bottom: 1.375rem; }
+.wordmark {
+  margin-bottom: 1.375rem;
+}
 
 .wordmark svg {
   display: block;
@@ -151,9 +204,13 @@ a { color: inherit; }
   color: var(--ink-soft);
 }
 
-.standfirst em { font-style: italic; }
+.standfirst em {
+  font-style: italic;
+}
 
-.roles { list-style: none; }
+.roles {
+  list-style: none;
+}
 
 .roles li {
   display: grid;
@@ -164,7 +221,9 @@ a { color: inherit; }
   border-top: 1px solid var(--paper-edge);
 }
 
-.roles li:last-child { border-bottom: 1px solid var(--paper-edge); }
+.roles li:last-child {
+  border-bottom: 1px solid var(--paper-edge);
+}
 
 .roles__yr {
   font-family: var(--mono);
@@ -206,7 +265,10 @@ a { color: inherit; }
   transform: rotate(0.4deg);
 }
 
-.plate__link { display: block; text-decoration: none; }
+.plate__link {
+  display: block;
+  text-decoration: none;
+}
 
 .plate__window {
   position: relative;
@@ -224,7 +286,9 @@ a { color: inherit; }
   transition: opacity 0.35s ease;
 }
 
-.plate.is-swapping img { opacity: 0; }
+.plate.is-swapping img {
+  opacity: 0;
+}
 
 .plate__caption {
   display: flex;
@@ -239,7 +303,9 @@ a { color: inherit; }
   text-transform: uppercase;
 }
 
-.plate__handle { color: var(--amber); }
+.plate__handle {
+  color: var(--amber);
+}
 
 .plate__advance {
   appearance: none;
@@ -254,10 +320,14 @@ a { color: inherit; }
   transition: color 0.2s ease;
 }
 
-.plate__advance:hover { color: var(--amber); }
+.plate__advance:hover {
+  color: var(--amber);
+}
 
 /* no JS, no button */
-.plate:not(.is-ready) .plate__advance { visibility: hidden; }
+.plate:not(.is-ready) .plate__advance {
+  visibility: hidden;
+}
 
 /* ---------- contact sheet ---------- */
 
@@ -300,16 +370,28 @@ a { color: inherit; }
   box-shadow: 0 2px 10px rgba(20, 20, 16, 0.18);
 }
 
-.negstrip--a { --tilt: var(--tilt-a); --shift: -0.4%; width: 99%; }
-.negstrip--b { --tilt: var(--tilt-b); --shift: 1.1%; width: 96.5%; align-self: flex-end; }
+.negstrip--a {
+  --tilt: var(--tilt-a);
+  --shift: -0.4%;
+  width: 99%;
+}
+.negstrip--b {
+  --tilt: var(--tilt-b);
+  --shift: 1.1%;
+  width: 96.5%;
+  align-self: flex-end;
+}
 
 .perf {
   height: 0.6875rem;
   background-image: repeating-linear-gradient(
     to right,
-    transparent 0, transparent 13px,
-    var(--sprocket) 13px, var(--sprocket) 31px,
-    transparent 31px, transparent 44px
+    transparent 0,
+    transparent 13px,
+    var(--sprocket) 13px,
+    var(--sprocket) 31px,
+    transparent 31px,
+    transparent 44px
   );
   background-size: auto 64%;
   background-position: left center;
@@ -348,7 +430,9 @@ a { color: inherit; }
 }
 
 .frame:hover,
-.frame:focus-visible { background: var(--neg-hi); }
+.frame:focus-visible {
+  background: var(--neg-hi);
+}
 
 .frame__num {
   font-family: var(--mono);
@@ -387,7 +471,9 @@ a { color: inherit; }
 }
 
 .frame:hover .frame__dest,
-.frame:focus-visible .frame__dest { color: var(--amber); }
+.frame:focus-visible .frame__dest {
+  color: var(--amber);
+}
 
 /* The grease-pencil mark: what you do to a keeper.
    Stroke colour and the dash reveal are set here rather than on the
@@ -432,25 +518,58 @@ a { color: inherit; }
   stroke-dashoffset: var(--len, 1200);
   opacity: var(--mark-opacity, 0.88);
   /* fast off the mark, decelerating into the lift — a hand, not a motor */
-  transition: stroke-dashoffset var(--dur, 0.7s) cubic-bezier(0.18, 0.62, 0.28, 1);
+  transition: stroke-dashoffset var(--dur, 0.7s)
+    cubic-bezier(0.18, 0.62, 0.28, 1);
 }
 
 /* <symbol> instances clip to their own viewBox — the UA stylesheet sets
    overflow: hidden on symbol. The marks overshoot the frame on purpose,
    so that clip has to come off, or the loop gets sliced at the edge.
    Also set as a presentation attribute on each symbol in index.html. */
-#grease-1, #grease-2, #grease-3,
-#grease-4, #grease-5, #grease-6 { overflow: visible; }
+#grease-1,
+#grease-2,
+#grease-3,
+#grease-4,
+#grease-5,
+#grease-6 {
+  overflow: visible;
+}
 
-.frame--1 { --len: 1166; --dur: 0.73s; --mark-opacity: 0.88; }
-.frame--2 { --len: 726; --dur: 0.58s; --mark-opacity: 0.93; }
-.frame--3 { --len: 1371; --dur: 0.8s; --mark-opacity: 0.84; }
-.frame--4 { --len: 942; --dur: 0.65s; --mark-opacity: 0.9; }
-.frame--5 { --len: 1013; --dur: 0.68s; --mark-opacity: 0.86; }
-.frame--6 { --len: 834; --dur: 0.62s; --mark-opacity: 0.94; }
+.frame--1 {
+  --len: 1166;
+  --dur: 0.73s;
+  --mark-opacity: 0.88;
+}
+.frame--2 {
+  --len: 726;
+  --dur: 0.58s;
+  --mark-opacity: 0.93;
+}
+.frame--3 {
+  --len: 1371;
+  --dur: 0.8s;
+  --mark-opacity: 0.84;
+}
+.frame--4 {
+  --len: 942;
+  --dur: 0.65s;
+  --mark-opacity: 0.9;
+}
+.frame--5 {
+  --len: 1013;
+  --dur: 0.68s;
+  --mark-opacity: 0.86;
+}
+.frame--6 {
+  --len: 834;
+  --dur: 0.62s;
+  --mark-opacity: 0.94;
+}
 
 .frame:hover .mark,
-.frame:focus-visible .mark { stroke-dashoffset: 0; }
+.frame:focus-visible .mark {
+  stroke-dashoffset: 0;
+}
 
 /* ---------- footer ---------- */
 
@@ -480,7 +599,9 @@ a { color: inherit; }
   border-color: var(--amber-ink);
 }
 
-.foot__made a { border-bottom-color: var(--amber-ink); }
+.foot__made a {
+  border-bottom-color: var(--amber-ink);
+}
 
 /* ---------- held vertically: sprockets down the long edges ---------- */
 
@@ -497,8 +618,14 @@ a { color: inherit; }
     padding: 0 0.5625rem;
   }
 
-  .negstrip--a { width: 97.5%; --shift: 0; }
-  .negstrip--b { width: 99%; --shift: 0; }
+  .negstrip--a {
+    width: 97.5%;
+    --shift: 0;
+  }
+  .negstrip--b {
+    width: 99%;
+    --shift: 0;
+  }
 
   .perf {
     flex: 0 0 0.6875rem;
@@ -507,9 +634,12 @@ a { color: inherit; }
     align-self: stretch;
     background-image: repeating-linear-gradient(
       to bottom,
-      transparent 0, transparent 13px,
-      var(--sprocket) 13px, var(--sprocket) 31px,
-      transparent 31px, transparent 44px
+      transparent 0,
+      transparent 13px,
+      var(--sprocket) 13px,
+      var(--sprocket) 31px,
+      transparent 31px,
+      transparent 44px
     );
     background-size: 64% auto;
     background-position: center top;
@@ -524,16 +654,29 @@ a { color: inherit; }
   }
 
   /* in a column, frames size to their own ratio, not a shared height */
-  .frames > .frame { flex: 0 0 auto; }
+  .frames > .frame {
+    flex: 0 0 auto;
+  }
 
-  .frame__blurb { max-width: none; }
+  .frame__blurb {
+    max-width: none;
+  }
 }
 
 @media (max-width: 520px) {
-  .margin-line__drop { display: none; }
-  .frame { aspect-ratio: auto; min-height: 11.5rem; }
-  .frame__title { font-size: 1.75rem; }
-  .proof { gap: 2rem; }
+  .margin-line__drop {
+    display: none;
+  }
+  .frame {
+    aspect-ratio: auto;
+    min-height: 11.5rem;
+  }
+  .frame__title {
+    font-size: 1.75rem;
+  }
+  .proof {
+    gap: 2rem;
+  }
 }
 
 /* ---------- develop-in ---------- */
@@ -544,19 +687,39 @@ a { color: inherit; }
     filter: contrast(0.4) brightness(1.35);
     animation: develop 0.85s cubic-bezier(0.25, 0.6, 0.3, 1) forwards;
   }
-  .negstrip--a .frame:nth-child(1) { animation-delay: 0.1s; }
-  .negstrip--a .frame:nth-child(2) { animation-delay: 0.19s; }
-  .negstrip--a .frame:nth-child(3) { animation-delay: 0.28s; }
-  .negstrip--b .frame:nth-child(1) { animation-delay: 0.37s; }
-  .negstrip--b .frame:nth-child(2) { animation-delay: 0.46s; }
-  .negstrip--b .frame:nth-child(3) { animation-delay: 0.55s; }
+  .negstrip--a .frame:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .negstrip--a .frame:nth-child(2) {
+    animation-delay: 0.19s;
+  }
+  .negstrip--a .frame:nth-child(3) {
+    animation-delay: 0.28s;
+  }
+  .negstrip--b .frame:nth-child(1) {
+    animation-delay: 0.37s;
+  }
+  .negstrip--b .frame:nth-child(2) {
+    animation-delay: 0.46s;
+  }
+  .negstrip--b .frame:nth-child(3) {
+    animation-delay: 0.55s;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .plate img { transition: none; }
+  .plate img {
+    transition: none;
+  }
 }
 
 @keyframes develop {
-  from { opacity: 0; filter: contrast(0.4) brightness(1.35); }
-  to { opacity: 1; filter: none; }
+  from {
+    opacity: 0;
+    filter: contrast(0.4) brightness(1.35);
+  }
+  to {
+    opacity: 1;
+    filter: none;
+  }
 }
