@@ -57,6 +57,11 @@
   var link = document.getElementById("plate-link");
   var button = document.getElementById("plate-advance");
   var data = document.getElementById("plate-data");
+
+  /* I don't want to have to manually update the year in the footer */
+  document.getElementById("current-year").textContent =
+    new Date().getFullYear();
+
   if (!plate || !img || !data) return;
 
   var photos;
@@ -98,7 +103,8 @@
         plate.classList.add("is-swapping");
         window.setTimeout(apply, 350);
       } else {
-        apply();
+        // keeps the photo from swapping when you first load the page, wait until user clicks on the button to advance.
+        // apply();
       }
     };
 
