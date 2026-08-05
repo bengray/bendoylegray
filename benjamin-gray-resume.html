@@ -1,0 +1,811 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Résumé, Ben Doyle Gray</title>
+    <meta
+      name="description"
+      content="Résumé of Ben Doyle Gray: software engineer and engineering manager, Warrenville, Illinois."
+    />
+    <meta name="theme-color" content="#e4e5e0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;600;800&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: #e4e5e0;
+        --frame: #eeefe9;
+        --ink: #191b18;
+        --ink-soft: #5a5e55;
+        --ink-faint: #8b8f85;
+        --rebate: #24261f;
+        --rebate-ink: #cfd0c8;
+        --china: #c0332a;
+        --rule: #c3c5bc;
+        --measure: 74ch;
+        --gap: clamp(1.6rem, 4vw, 2.75rem);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Newsreader", Georgia, serif;
+        font-size: clamp(15px, 1.05vw + 12px, 17px);
+        line-height: 1.55;
+        font-weight: 400;
+      }
+      .wrap {
+        max-width: calc(var(--measure) + 12rem);
+        margin: 0 auto;
+        padding: var(--gap) var(--gap) 5rem;
+      }
+
+      /* ---- film rebate: the edge of the strip, carrying the markings ---- */
+      .rebate {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 2.4rem;
+        background: var(--rebate);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.25rem 0;
+        z-index: 2;
+      }
+      .rebate span {
+        writing-mode: vertical-rl;
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--rebate-ink);
+        opacity: 0.75;
+      }
+      .sprockets {
+        flex: 1;
+        width: 100%;
+        margin: 1rem 0;
+        background-image: repeating-linear-gradient(
+          to bottom,
+          transparent 0 10px,
+          var(--paper) 10px 20px
+        );
+        opacity: 0.28;
+        -webkit-mask-image: linear-gradient(
+          to bottom,
+          transparent,
+          #000 8%,
+          #000 92%,
+          transparent
+        );
+        mask-image: linear-gradient(
+          to bottom,
+          transparent,
+          #000 8%,
+          #000 92%,
+          transparent
+        );
+      }
+      @media (max-width: 720px) {
+        .rebate {
+          display: none;
+        }
+      }
+      @media (min-width: 721px) {
+        .wrap {
+          padding-left: calc(var(--gap) + 2.4rem);
+        }
+      }
+
+      /* ---- header ---- */
+      header {
+        padding: 1rem 0 2.25rem;
+        border-bottom: 1px solid var(--rule);
+      }
+      .edge {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 0.66rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.9rem;
+        margin-bottom: 1.1rem;
+      }
+      h1 {
+        font-family: "Big Shoulders Display", Impact, sans-serif;
+        font-weight: 800;
+        font-size: clamp(3.2rem, 11vw, 6.5rem);
+        line-height: 0.84;
+        margin: 0 0 0.5rem;
+        letter-spacing: -0.005em;
+        text-transform: uppercase;
+      }
+      .tagline {
+        font-size: 1.05rem;
+        color: var(--ink-soft);
+        max-width: var(--measure);
+        margin: 0 0 1.25rem;
+      }
+      .contact {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 0.78rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem 1.4rem;
+        color: var(--ink-soft);
+      }
+      .contact a {
+        color: var(--ink);
+        text-decoration: none;
+        border-bottom: 1px solid var(--rule);
+      }
+      .contact a:hover,
+      .contact a:focus-visible {
+        border-bottom-color: var(--china);
+        color: var(--china);
+      }
+
+      /* ---- sections ---- */
+      section {
+        padding: 2.25rem 0 0.5rem;
+        border-bottom: 1px solid var(--rule);
+      }
+      section:last-of-type {
+        border-bottom: 0;
+      }
+      h2 {
+        font-family: "Big Shoulders Display", Impact, sans-serif;
+        font-weight: 600;
+        font-size: 1.5rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        margin: 0 0 1.4rem;
+        color: var(--ink);
+        display: flex;
+        align-items: baseline;
+        gap: 0.75rem;
+      }
+      h2::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--rule);
+      }
+
+      .lede {
+        font-size: 1.08rem;
+        max-width: var(--measure);
+        margin: 0;
+      }
+
+      /* ---- roles ---- */
+      .role {
+        position: relative;
+        padding: 1rem 0 1.15rem;
+        border-top: 1px solid transparent;
+      }
+      .role + .role {
+        border-top-color: var(--rule);
+      }
+      .role::before {
+        content: "";
+        position: absolute;
+        left: -1.15rem;
+        top: 1.35rem;
+        width: 3px;
+        height: 0;
+        background: var(--china);
+        border-radius: 2px;
+        transition: height 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .role:hover::before,
+      .role:focus-within::before {
+        height: calc(100% - 2.4rem);
+      }
+      .role-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 0.25rem 0.8rem;
+        margin-bottom: 0.15rem;
+      }
+      .role h3 {
+        font-family: "Big Shoulders Display", Impact, sans-serif;
+        font-weight: 600;
+        font-size: 1.45rem;
+        letter-spacing: 0.02em;
+        margin: 0;
+        text-transform: uppercase;
+      }
+      .org {
+        color: var(--ink-soft);
+        font-size: 1rem;
+      }
+      .when {
+        margin-left: auto;
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 0.74rem;
+        letter-spacing: 0.1em;
+        color: var(--ink-faint);
+        white-space: nowrap;
+      }
+      .note {
+        color: var(--ink-soft);
+        font-size: 0.95rem;
+        margin: 0.35rem 0 0.5rem;
+        max-width: var(--measure);
+      }
+      .role ul {
+        margin: 0.5rem 0 0;
+        padding: 0;
+        list-style: none;
+        max-width: var(--measure);
+      }
+      .role li {
+        position: relative;
+        padding-left: 1.1rem;
+        margin-bottom: 0.4rem;
+      }
+      .role li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.62em;
+        width: 0.42rem;
+        height: 1px;
+        background: var(--ink-faint);
+      }
+
+      /* ---- work + skills ---- */
+      .entry {
+        margin-bottom: 1.1rem;
+        max-width: var(--measure);
+      }
+      .entry b {
+        font-family: "Big Shoulders Display", Impact, sans-serif;
+        font-weight: 600;
+        font-size: 1.15rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 0.1rem;
+      }
+      .entry a {
+        color: inherit;
+        text-decoration: none;
+        border-bottom: 1px solid var(--rule);
+      }
+      .entry a:hover {
+        color: var(--china);
+        border-bottom-color: var(--china);
+      }
+      .skills {
+        display: grid;
+        gap: 1rem;
+      }
+      .skills div {
+        max-width: var(--measure);
+      }
+      .skills b {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-weight: 500;
+        font-size: 0.72rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--china);
+        display: block;
+        margin-bottom: 0.2rem;
+      }
+      footer {
+        padding: 2.5rem 0 0;
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.2rem;
+      }
+      footer a {
+        color: inherit;
+      }
+      :focus-visible {
+        outline: 2px solid var(--china);
+        outline-offset: 3px;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+        }
+      }
+
+      /* ---- print: this is the PDF ---- */
+      @media print {
+        :root {
+          --paper: #fff;
+          --ink: #000;
+          --ink-soft: #333;
+          --ink-faint: #555;
+          --rule: #bbb;
+        }
+        @page {
+          margin: 11mm 13mm;
+        }
+        body {
+          font-size: 8.9pt;
+          line-height: 1.32;
+          background: #fff;
+        }
+        .rebate,
+        footer {
+          display: none;
+        }
+        .wrap {
+          max-width: none;
+          padding: 0;
+        }
+        header {
+          padding: 0 0 0.7rem;
+        }
+        .edge {
+          margin-bottom: 0.5rem;
+          font-size: 6.4pt;
+        }
+        h1 {
+          font-size: 28pt;
+          margin-bottom: 0.25rem;
+        }
+        h2 {
+          font-size: 11pt;
+          margin-bottom: 0.45rem;
+        }
+        .tagline {
+          font-size: 9.4pt;
+          margin-bottom: 0.55rem;
+        }
+        .contact {
+          font-size: 7.6pt;
+        }
+        .lede {
+          font-size: 9pt;
+        }
+        .role h3 {
+          font-size: 10.5pt;
+        }
+        .role {
+          padding: 0.36rem 0 0.38rem;
+          break-inside: avoid;
+        }
+        .role::before {
+          display: none;
+        }
+        .role li {
+          margin-bottom: 0.16rem;
+        }
+        .note {
+          margin: 0.18rem 0 0.24rem;
+          font-size: 8.6pt;
+        }
+        section {
+          padding: 0.62rem 0 0.15rem;
+          break-inside: auto;
+        }
+        h2,
+        .role-head {
+          break-after: avoid;
+        }
+        .entry {
+          margin-bottom: 0.5rem;
+        }
+        .skills {
+          gap: 0.42rem;
+        }
+        a {
+          text-decoration: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="rebate" aria-hidden="true">
+      <span>BDG · 400</span>
+      <div class="sprockets"></div>
+      <span>Safety film</span>
+    </div>
+
+    <div class="wrap">
+      <header>
+        <div class="edge">
+          <span>Résumé</span><span>Frame 2A</span
+          ><span>Warrenville, Illinois</span>
+        </div>
+        <h1>Ben Doyle<br />Gray</h1>
+        <p class="tagline">
+          Software engineer and engineering manager. Sixteen years of building
+          things people depend on, and five of running the teams that build
+          them. Before that, a decade organizing programs and the volunteers who
+          staff them.
+        </p>
+        <p class="contact">
+          <a href="mailto:hello@bendoylegray.com">hello@bendoylegray.com</a>
+          <a href="https://bendoylegray.com">bendoylegray.com</a>
+          <a href="https://www.linkedin.com/in/bendoylegray/"
+            >linkedin.com/in/bendoylegray</a
+          >
+          <a href="https://github.com/bengray">github.com/bengray</a>
+        </p>
+      </header>
+
+      <section>
+        <h2>The short version</h2>
+        <p class="lede">
+          I taught myself to write code in the early 2010s after a decade in
+          ministry and nonprofit program administration, and spent the years
+          since shipping web software: e-commerce at scale, SaaS platforms,
+          internal tools, and instrumentation for customers. Five of those years
+          were spent managing engineers rather than only being one. I still
+          build sites end to end, copy included, and I still run volunteer
+          programs on the side because it turns out that skill never stopped
+          being useful.
+        </p>
+      </section>
+
+      <section>
+        <h2>Experience</h2>
+
+        <article class="role">
+          <div class="role-head">
+            <h3>Founder &amp; Lead Software Engineer</h3>
+            <span class="org">Code Less Traveled LLC</span>
+            <span class="when">Oct 2023 – Present</span>
+          </div>
+          <p class="note">
+            Independent web development, consulting, hosting, and support,
+            focused on serving marginalized and underprivileged communities.
+          </p>
+          <ul>
+            <li>
+              Own the full client cycle: scoping, written proposals, delivery,
+              and ongoing support.
+            </li>
+            <li>
+              Design and build sites end to end, covering information
+              architecture, visual design, copy, and implementation.
+            </li>
+            <li>
+              Integrate headless CMS platforms with existing e-commerce sites
+              via custom JavaScript, GraphQL, and REST.
+            </li>
+          </ul>
+        </article>
+
+        <article class="role">
+          <div class="role-head">
+            <h3>Senior Engineer, Contract</h3>
+            <span class="org">Charter Communications</span>
+            <span class="when">Sep 2024 – Apr 2025</span>
+          </div>
+          <p class="note">
+            Greenfield internal application using NLP and LLM tooling to convert
+            speech to transcripts and let users query them.
+          </p>
+          <ul>
+            <li>
+              Built the front end on a small, fast-moving team across React, AWS
+              Lambda, Python, and websockets.
+            </li>
+            <li>
+              Triaged incoming bugs and requests, diagnosing root cause across
+              the frontend, API, and websocket layers.
+            </li>
+          </ul>
+        </article>
+
+        <article class="role">
+          <div class="role-head">
+            <h3>Manager, Information Technology</h3>
+            <span class="org">Floor &amp; Decor</span>
+            <span class="when">Apr 2023 – Jul 2024</span>
+          </div>
+          <p class="note">
+            Managed a six-person full-stack team owning 14 internal applications
+            used by store and corporate staff nationwide.
+          </p>
+          <ul>
+            <li>
+              Owned hiring, onboarding, mentoring, code review, performance
+              reviews, delivery, and team well-being.
+            </li>
+            <li>
+              Led the replatform of legacy applications to React, Spring Boot,
+              and PostgreSQL, including migration to Azure.
+            </li>
+            <li>
+              Owned a purchase order processing vendor relationship, driving
+              throughput from 400 to 2,000 orders per hour.
+            </li>
+            <li>
+              Served as escalation point for production issues, prioritizing by
+              business impact against SLA commitments.
+            </li>
+          </ul>
+        </article>
+
+        <article class="role">
+          <div class="role-head">
+            <h3>Software Development Manager</h3>
+            <span class="org">Revel Systems</span>
+            <span class="when">Dec 2020 – Apr 2023</span>
+          </div>
+          <p class="note">
+            International cloud-native POS platform combining hardware and
+            software. Set vision for three engineering teams.
+          </p>
+          <ul>
+            <li>
+              Mentored and developed engineers, with regular promotions out of
+              the team.
+            </li>
+            <li>
+              Oversaw an iOS team delivering asset provisioning, custom printer
+              integrations, and device sync improvements.
+            </li>
+            <li>
+              Standardized branching, testing, documentation, and release notes,
+              improving traceability from report to fix.
+            </li>
+            <li>
+              Built an internship program from scratch to improve talent
+              acquisition and mentoring capacity.
+            </li>
+          </ul>
+        </article>
+
+        <article class="role">
+          <div class="role-head">
+            <h3>Front End Engineering Team Lead</h3>
+            <span class="org">Rooms To Go</span>
+            <span class="when">Apr 2019 – Dec 2020</span>
+          </div>
+          <ul>
+            <li>
+              Reduced homepage payload from 13 MB to 3 MB, improving load speed
+              roughly 75%.
+            </li>
+            <li>
+              Shipped features during a period when e-commerce revenue grew from
+              $300K to $2.5M per day.
+            </li>
+            <li>Drove AA Section 508 accessibility compliance.</li>
+          </ul>
+        </article>
+
+        <article class="role">
+          <div class="role-head">
+            <h3>Senior Software Engineer, UI Engineer</h3>
+            <span class="org">Cox Automotive</span>
+            <span class="when">Jun 2015 – Jan 2019</span>
+          </div>
+          <p class="note">
+            Cox Automotive owns Kelley Blue Book, Autotrader, and Manheim.
+            Includes a contract at CNN via Turner Digital Media, early 2019.
+          </p>
+          <ul>
+            <li>
+              UI engineer on Autotrader, then full-stack engineer building
+              Node.js and Docker microservices on AWS.
+            </li>
+            <li>
+              Contributed to a front-page ad unit that generated approximately
+              $5M in revenue.
+            </li>
+            <li>
+              Developed the front end for the rebranding of Trade-In Marketplace
+              to Kelley Blue Book Instant Cash Offer.
+            </li>
+          </ul>
+        </article>
+
+        <article class="role">
+          <div class="role-head">
+            <h3>Senior Software Developer</h3>
+            <span class="org">KSE Outdoor Group</span>
+            <span class="when">Jan 2014 – Jun 2015</span>
+          </div>
+          <ul>
+            <li>
+              Built commercial web and e-commerce applications for
+              gunsandammo.com and in-fisherman.com.
+            </li>
+          </ul>
+        </article>
+
+        <article class="role">
+          <div class="role-head">
+            <h3>Web Application Developer &amp; Systems Administrator</h3>
+            <span class="org">JMX Services</span>
+            <span class="when">Jun 2010 – Jan 2014</span>
+          </div>
+          <p class="note">
+            High-voltage test equipment manufacturer and R&amp;D lab. Clients
+            included Georgia Power and Georgia Tech.
+          </p>
+          <ul>
+            <li>
+              Developed the web application for the TECAM system. A real-time
+              condition monitor for energized power transformers, presented to
+              and purchased by Georgia Power on a recurring annual contract
+              still active today.
+            </li>
+            <li>
+              Worked alongside the lead electrical and systems engineers on
+              bushing tap coupling, load tap changer transients, and online
+              frequency response analysis.
+            </li>
+            <li>
+              Supported field installation on energized transformers at a
+              utility substation.
+            </li>
+            <li>
+              Built the 4U database server from components, configured the OS
+              and MSSQL, and deployed it to a colocation facility.
+            </li>
+          </ul>
+        </article>
+
+        <article class="role">
+          <div class="role-head">
+            <h3>Youth Pastor</h3>
+            <span class="org">Church ministry</span>
+            <span class="when">2002 – 2009</span>
+          </div>
+          <ul>
+            <li>
+              Planned, organized and executed Vacation Bible School annually for
+              roughly 100 children with two dozen adult volunteers recruited and
+              trained each year.
+            </li>
+            <li>
+              Recruited and led volunteer teams for an annual ski trip serving
+              30 teenagers.
+            </li>
+            <li>
+              Recruited and scheduled Sunday school teachers so every classroom
+              was staffed every week.
+            </li>
+            <li>
+              Researched, secured budget for, and oversaw construction of the
+              church playground.
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <section>
+        <h2>Volunteer leadership</h2>
+        <article class="role">
+          <div class="role-head">
+            <h3>Founding Scoutmaster</h3>
+            <span class="org">Troop 2258, Senoia, Georgia</span>
+            <span class="when">2022 – 2024</span>
+          </div>
+          <ul>
+            <li>
+              Co-founded and chartered a new Scouts BSA troop, securing funding,
+              a chartering sponsor, and a meeting space, and recruiting 30
+              founding families.
+            </li>
+            <li>
+              Served two years as Scoutmaster: adult leader recruitment and
+              training, program calendar, budget, and records.
+            </li>
+            <li>
+              Preceded by three years as an assistant scoutmaster in an
+              established troop.
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <section>
+        <h2>Selected work</h2>
+        <div class="entry">
+          <b><a href="https://bendoylegray.com">bendoylegray.com</a></b>
+          Personal hub. Contact-sheet-from-film concept with a grease-pencil
+          hover mark drawn in SVG and animated from path lengths measured at
+          runtime. Plain HTML, CSS, and JavaScript, no build step, no
+          dependencies.
+        </div>
+        <div class="entry">
+          <b><a href="https://codelesstraveled.com">codelesstraveled.com</a></b>
+          Consultancy site. Swiss typographic layout on a hairline grid, with a
+          custom logo mark positioned against live font metrics measured at
+          runtime via Canvas TextMetrics.
+        </div>
+        <div class="entry">
+          <b><a href="https://benatlarge.com">benatlarge.com</a></b> Pet
+          photography site. Keyboard-accessible master and detail gallery built
+          from real button elements; degrades to a stacked gallery with
+          JavaScript disabled.
+        </div>
+        <div class="entry">
+          <b>Crow and Moon Enchantments</b> Client site. Eleventy 3.x static
+          build for a handmade-goods business, with a modular SCSS architecture
+          on the Sass
+          <span
+            style="
+              font-family: &quot;IBM Plex Mono&quot;, monospace;
+              font-size: 0.9em;
+            "
+            >@use</span
+          >
+          module system and copy written in the owner's voice.
+        </div>
+      </section>
+
+      <section>
+        <h2>Skills</h2>
+        <div class="skills">
+          <div>
+            <b>Languages &amp; frameworks</b>JavaScript, TypeScript, React,
+            Redux, Node.js, Vue, Gatsby, Eleventy, Java, Spring Boot, Python,
+            Go, PHP
+          </div>
+          <div>
+            <b>Platform &amp; infrastructure</b>AWS, Azure, Docker, Terraform,
+            Jenkins, ArgoCD, GitHub Actions, GitLab CI, NGINX, Apache; server
+            build, OS configuration, colocation deployment
+          </div>
+          <div>
+            <b>Data &amp; APIs</b>SQL (MSSQL, PostgreSQL, MySQL), MongoDB, REST,
+            GraphQL, headless CMS (Contentful, Strapi, 4D)
+          </div>
+          <div>
+            <b>Front end</b>HTML5, CSS, Sass, styled-components, Webpack, Vite,
+            accessibility (WCAG AA and Section 508)
+          </div>
+          <div>
+            <b>Practice</b>Production support and incident triage, hiring and
+            mentoring, code review and release standards, requirements gathering
+            and written proposals, volunteer and program administration
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Education</h2>
+        <p class="lede">
+          Bachelor's Degree in Family Ministries, Toccoa Falls College, Toccoa,
+          Georgia. Minor in Camping, a curriculum in outdoor program
+          organization and administration.
+        </p>
+      </section>
+
+      <footer>
+        <span>© Ben Doyle Gray</span>
+        <span
+          ><a href="https://bendoylegray.com"
+            >Back to the contact sheet</a
+          ></span
+        >
+        <span>Print this page for the PDF</span>
+      </footer>
+    </div>
+  </body>
+</html>
