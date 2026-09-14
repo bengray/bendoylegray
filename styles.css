@@ -94,37 +94,13 @@ a {
 }
 
 .margin-line-head {
+  display: flex;
+  justify-content: space-between;
   font-family: var(--mono);
   font-size: 0.5625rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--muted);
-  transform: rotate(-90deg);
-  position: absolute;
-  left: 0;
-  top: 0;
-  margin-left: -233px;
-  margin-top: 480px;
-}
-
-.info {
-  padding-right: 25px;
-}
-
-/* iPhone in portrait */
-@media (min-width: 640px) {
-  .margin-line-head {
-    margin-left: -300px;
-    margin-top: 600px;
-  }
-}
-
-/* iPhone in landscape and desktop */
-@media (min-width: 1024px) {
-  .margin-line-head {
-    margin-left: -150px;
-    margin-top: 680px;
-  }
 }
 
 .margin-line-foot {
@@ -159,7 +135,7 @@ a {
   display: flex;
   flex-direction: column;
   gap: clamp(1.25rem, 3vw, 2rem);
-  margin: 50px 0 0;
+  margin: 5px 0 0;
 }
 
 @media (min-width: 900px) {
@@ -175,7 +151,6 @@ a {
 
 .eyebrow {
   font-family: var(--mono);
-  font-size: 0.625rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--muted);
