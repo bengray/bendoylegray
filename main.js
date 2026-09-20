@@ -1,13 +1,3 @@
-/* ============================================================
-   bendoylegray.com
-   Two small jobs. Both optional — the page works without either.
-   ============================================================ */
-
-/* ---- 1. Lock the wordmark lines to one measure -------------
-   Each line is letterspaced out to the width of the widest, so
-   the name reads as a hard rectangle. Measured at runtime, so it
-   holds regardless of font metrics or which fallback loaded.
-   If this never runs, you get a ragged left-aligned stack. */
 (function () {
   var svg = document.getElementById("wm");
   if (!svg) return;
@@ -28,12 +18,6 @@
       t.setAttribute("textLength", max);
     });
 
-    /* Match the bottom crop to the top crop.
-       The first line's ink spills above y=0 and gets clipped by the
-       viewBox. Measure how much, then take the same amount off the
-       bottom so the block is cropped evenly top and bottom.
-       Measured rather than hardcoded, so it survives a font fallback
-       or a change of typeface. */
     var height = 232;
 
     svg.setAttribute("viewBox", "0 0 " + max + " " + height);
@@ -46,11 +30,39 @@
   }
 })();
 
-/* ---- 2. Rotate the hero photo ------------------------------
-   Picks a random frame on load, advances on click. The first
-   photo is already in the HTML, so there is an image on the page
-   before this runs. Edit the JSON block in index.html to change
-   the set. */
+(function () {
+  var frames = Array.prototype.slice.call(document.querySelectorAll(".frame"));
+  if (!frames.length) return;
+
+  frames.forEach(function (frame) {
+    var use = frame.querySelector(".mark use");
+    if (!use) return;
+
+    var href = use.getAttribute("href") || use.getAttribute("xlink:href");
+    if (!href || href.charAt(0) !== "#") return;
+
+    var symbol = document.getElementById(href.slice(1));
+    if (!symbol) return;
+
+    var longest = 0;
+    Array.prototype.slice
+      .call(symbol.querySelectorAll("path"))
+      .forEach(function (path) {
+        var len;
+        try {
+          len = path.getTotalLength();
+        } catch (e) {
+          return;
+        }
+        if (isFinite(len) && len > longest) longest = len;
+      });
+
+    if (longest > 0) {
+      frame.style.setProperty("--len", Math.ceil(longest) + 6);
+    }
+  });
+})();
+
 (function () {
   var plate = document.getElementById("plate");
   var img = document.getElementById("plate-img");
@@ -103,8 +115,7 @@
         plate.classList.add("is-swapping");
         window.setTimeout(apply, 350);
       } else {
-        // keeps the photo from swapping when you first load the page, wait until user clicks on the button to advance.
-        // apply();
+        apply();
       }
     };
 
@@ -112,7 +123,8 @@
   }
 
   plate.classList.add("is-ready");
-  show(pick(), false);
+  /* Frame 0 is the one already painted in the markup, so opening on it costs no second request and no flash. Going through show() rather than assuming the state keeps `current` honest, so the first click advances from what the visitor is actually looking at. */
+  show(0, false);
 
   if (button) {
     button.addEventListener("click", function () {

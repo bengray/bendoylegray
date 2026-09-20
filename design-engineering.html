@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Design Engineering, Ben Doyle Gray</title>
+    <meta
+      name="description"
+      content="Contract design engineering: information architecture, visual design, copy, component systems, and the production code that ships them. One person, no handoff. Remote or Chicago area."
+    />
+    <link
+      rel="canonical"
+      href="https://bendoylegray.com/design-engineering.html"
+    />
+    <meta name="theme-color" content="#e4e5e0" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ben Doyle Gray" />
+    <meta property="og:title" content="Design Engineering, Ben Doyle Gray" />
+    <meta
+      property="og:description"
+      content="I design the interface and write the production code that ships it. Contract engagements, remote or Chicago area."
+    />
+    <meta
+      property="og:url"
+      content="https://bendoylegray.com/design-engineering.html"
+    />
+    <meta property="og:image" content="https://bendoylegray.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="The name Ben Doyle Gray set in three stacked lines beside a strip of film negative."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;600;800&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* Same tokens as benjamin-gray-resume.html. If you change one,
+         change both, or the two pages drift apart. Could I make this a shared file? Yes. Yes I could. */
+      :root {
+        --paper: #e4e5e0;
+        --frame: #eeefe9;
+        --ink: #191b18;
+        --ink-soft: #5a5e55;
+        --ink-faint: #8b8f85;
+        --rebate: #24261f;
+        --rebate-ink: #cfd0c8;
+        --china: #c0332a;
+        --rule: #c3c5bc;
+        --measure: 74ch;
+        --gap: clamp(1.6rem, 4vw, 2.75rem);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Newsreader", Georgia, serif;
+        font-size: clamp(15px, 1.05vw + 12px, 17px);
+        line-height: 1.55;
+        font-weight: 400;
+      }
+      .wrap {
+        max-width: calc(var(--measure) + 12rem);
+        margin: 0 auto;
+        padding: var(--gap) var(--gap) 5rem;
+      }
+
+      /* ---- film rebate ---- */
+      .rebate {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 2.4rem;
+        background: var(--rebate);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.25rem 0;
+        z-index: 2;
+      }
+      .rebate span {
+        writing-mode: vertical-rl;
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--rebate-ink);
+        opacity: 0.75;
+      }
+      .sprockets {
+        flex: 1;
+        width: 100%;
+        margin: 1rem 0;
+        background-image: repeating-linear-gradient(
+          to bottom,
+          transparent 0 10px,
+          var(--paper) 10px 20px
+        );
+        opacity: 0.28;
+        -webkit-mask-image: linear-gradient(
+          to bottom,
+          transparent,
+          #000 8%,
+          #000 92%,
+          transparent
+        );
+        mask-image: linear-gradient(
+          to bottom,
+          transparent,
+          #000 8%,
+          #000 92%,
+          transparent
+        );
+      }
+      @media (max-width: 720px) {
+        .rebate {
+          display: none;
+        }
+      }
+      @media (min-width: 721px) {
+        .wrap {
+          padding-left: calc(var(--gap) + 2.4rem);
+        }
+      }
+
+      /* ---- header ---- */
+      header {
+        padding: 1rem 0 2.25rem;
+        border-bottom: 1px solid var(--rule);
+      }
+      .edge {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 0.66rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.9rem;
+        margin-bottom: 1.1rem;
+      }
+      .edge a {
+        color: inherit;
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+      }
+      .edge a:hover,
+      .edge a:focus-visible {
+        color: var(--china);
+        border-bottom-color: var(--china);
+      }
+      h1 {
+        font-family: "Big Shoulders Display", Impact, sans-serif;
+        font-weight: 800;
+        font-size: clamp(3.2rem, 11vw, 6.5rem);
+        line-height: 0.84;
+        margin: 0 0 0.75rem;
+        letter-spacing: -0.005em;
+        text-transform: uppercase;
+        text-wrap: balance;
+      }
+      .tagline {
+        font-size: 1.12rem;
+        color: var(--ink-soft);
+        max-width: var(--measure);
+        margin: 0 0 1.35rem;
+      }
+      .contact {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 0.78rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem 1.4rem;
+        color: var(--ink-soft);
+      }
+      .contact a {
+        color: var(--ink);
+        text-decoration: none;
+        border-bottom: 1px solid var(--rule);
+      }
+      .contact a:hover,
+      .contact a:focus-visible {
+        border-bottom-color: var(--china);
+        color: var(--china);
+      }
+
+      /* ---- sections ---- */
+      section {
+        padding: 2.25rem 0 0.75rem;
+        border-bottom: 1px solid var(--rule);
+      }
+      section:last-of-type {
+        border-bottom: 0;
+      }
+      h2 {
+        font-family: "Big Shoulders Display", Impact, sans-serif;
+        font-weight: 600;
+        font-size: 1.5rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        margin: 0 0 1.4rem;
+        color: var(--ink);
+        display: flex;
+        align-items: baseline;
+        gap: 0.75rem;
+      }
+      h2::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--rule);
+      }
+      p {
+        max-width: var(--measure);
+        margin: 0 0 1rem;
+      }
+      p:last-child {
+        margin-bottom: 0;
+      }
+      .lede {
+        font-size: 1.08rem;
+      }
+      .pull {
+        font-family: "Big Shoulders Display", Impact, sans-serif;
+        font-weight: 600;
+        font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+        line-height: 1.12;
+        letter-spacing: 0.01em;
+        color: var(--ink);
+        border-left: 3px solid var(--china);
+        padding-left: 1.1rem;
+        margin: 0 0 1.5rem;
+        max-width: 46ch;
+        text-wrap: balance;
+      }
+
+      /* ---- engagements ---- */
+      .kinds {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 1px;
+        background: var(--rule);
+        border-top: 1px solid var(--rule);
+        border-bottom: 1px solid var(--rule);
+      }
+      .kinds > li {
+        background: var(--paper);
+        padding: 1.05rem 0;
+      }
+      .kinds h3 {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 0.74rem;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        margin: 0 0 0.4rem;
+        color: var(--china);
+      }
+      .kinds p {
+        margin: 0;
+        color: var(--ink-soft);
+      }
+
+      /* ---- work ---- */
+      .work {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .work > li {
+        padding: 1.15rem 0;
+        border-top: 1px solid var(--rule);
+      }
+      .work > li:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+      .work h3 {
+        font-family: "Big Shoulders Display", Impact, sans-serif;
+        font-weight: 600;
+        font-size: 1.45rem;
+        letter-spacing: 0.02em;
+        margin: 0 0 0.3rem;
+        text-transform: uppercase;
+      }
+      .work h3 a {
+        color: inherit;
+        text-decoration: none;
+        border-bottom: 2px solid var(--rule);
+      }
+      .work h3 a:hover,
+      .work h3 a:focus-visible {
+        color: var(--china);
+        border-bottom-color: var(--china);
+      }
+      .work .role {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+      .work p {
+        margin: 0;
+        color: var(--ink-soft);
+      }
+
+      /* ---- numbers ---- */
+      .figures {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        /* Four figures, so two columns rather than three: an auto-fit
+           track count leaves the fourth stranded alone on its own row. */
+        grid-template-columns: 1fr;
+        gap: 1.6rem 2.5rem;
+      }
+      @media (min-width: 560px) {
+        .figures {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      .figures b {
+        display: block;
+        font-family: "Big Shoulders Display", Impact, sans-serif;
+        font-weight: 800;
+        font-size: clamp(2rem, 5vw, 2.7rem);
+        line-height: 1;
+        color: var(--china);
+        font-variant-numeric: tabular-nums;
+        margin-bottom: 0.3rem;
+      }
+      .figures span {
+        color: var(--ink-soft);
+        font-size: 0.95rem;
+      }
+
+      /* ---- close ---- */
+      .close a.big {
+        font-family: "Big Shoulders Display", Impact, sans-serif;
+        font-weight: 800;
+        /* Sized to fit the address on one line down to phone width. An
+           address broken mid-word reads as a typo, not a link. */
+        font-size: clamp(1.25rem, 5.2vw, 2.4rem);
+        text-transform: uppercase;
+        color: var(--ink);
+        text-decoration: none;
+        border-bottom: 3px solid var(--china);
+        line-height: 1.1;
+        display: inline-block;
+        max-width: 100%;
+        word-break: normal;
+        overflow-wrap: normal;
+      }
+      .close a.big:hover,
+      .close a.big:focus-visible {
+        color: var(--china);
+      }
+
+      footer {
+        padding-top: 2.25rem;
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-faint);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.4rem;
+      }
+      footer a {
+        color: inherit;
+        text-decoration: none;
+        border-bottom: 1px solid var(--rule);
+      }
+      footer a:hover,
+      footer a:focus-visible {
+        color: var(--china);
+        border-bottom-color: var(--china);
+      }
+
+      a:focus-visible {
+        outline: 2px solid var(--china);
+        outline-offset: 3px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+          animation: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="rebate" aria-hidden="true">
+      <span>BDG &middot; DESIGN ENGINEERING</span>
+      <div class="sprockets"></div>
+      <span>ONE PERSON &middot; NO HANDOFF</span>
+    </div>
+
+    <div class="wrap">
+      <header>
+        <p class="edge">
+          <a href="/">&larr; Ben Doyle Gray</a>
+          <span>Design engineering</span>
+          <span>Warrenville, IL</span>
+        </p>
+
+        <h1>The drawing<br />and the building</h1>
+
+        <p class="tagline">
+          I am a design engineer. I take an interface from information
+          architecture and visual design through copy, component system, and the
+          production code that ships it. Sixteen years of it, across
+          high-traffic e-commerce, SaaS platforms, and internal tools.
+        </p>
+
+        <p class="contact">
+          <a href="mailto:ben@bendoylegray.com">ben@bendoylegray.com</a>
+          <a href="https://www.linkedin.com/in/bendoylegray/">LinkedIn</a>
+          <a href="/benjamin-gray-resume.html">Résumé</a>
+          <span>Remote or Chicago area</span>
+        </p>
+      </header>
+
+      <section>
+        <h2>The argument</h2>
+
+        <p class="pull">
+          Most teams hire a designer, then hire an engineer to rebuild what the
+          designer drew.
+        </p>
+
+        <p class="lede">
+          The translation takes weeks, and the things that get lost are never
+          the big things. It is the type that was set against real font metrics
+          and is now set against a guess. The motion that was timed to the
+          actual geometry and is now a 300ms default. The keyboard path nobody
+          rebuilt because it was not in the mockup.
+        </p>
+
+        <p>
+          Those are not design details or engineering details. They are the same
+          detail, and they survive when one person carries them from sketch to
+          production. That is the whole of what I sell: the seam, removed.
+        </p>
+
+        <p>
+          Five of my sixteen years were spent leading engineering teams and
+          setting the code review, accessibility, and release standards those
+          teams worked to. In practice that means I do not need a senior
+          engineer to check my work, and I will tell you when something you have
+          asked for is going to cost more than it returns.
+        </p>
+      </section>
+
+      <section>
+        <h2>What I take on</h2>
+        <ul class="kinds">
+          <li>
+            <h3>Design and build</h3>
+            <p>
+              A site or product surface from nothing: architecture, visual
+              design, copy, and the shipped front end. The version where you
+              hire one person instead of two.
+            </p>
+          </li>
+          <li>
+            <h3>Design systems</h3>
+            <p>
+              Component libraries built to survive contact with production,
+              documented so the team that inherits them can extend them without
+              calling me.
+            </p>
+          </li>
+          <li>
+            <h3>Interface rescue</h3>
+            <p>
+              A product whose interface was finished once and has drifted since.
+              Redrawn and reimplemented, usually in place, without a rewrite.
+            </p>
+          </li>
+          <li>
+            <h3>Accessibility and performance</h3>
+            <p>
+              WCAG AA and Section 508 remediation, and the payload and rendering
+              work that makes a storefront usable on the network it actually
+              ships over.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Some numbers</h2>
+        <ul class="figures">
+          <li>
+            <b>13&rarr;3 MB</b>
+            <span
+              >Homepage payload at Rooms To Go, roughly 75 percent faster,
+              during a period of steep traffic growth.</span
+            >
+          </li>
+          <li>
+            <b>$2.5M</b>
+            <span
+              >Daily e-commerce revenue by the end of that stretch, up from
+              $300K, with me owning the front end.</span
+            >
+          </li>
+          <li>
+            <b>AA / 508</b>
+            <span
+              >Accessibility compliance driven across a high-traffic storefront,
+              not retrofitted as an afterthought.</span
+            >
+          </li>
+          <li>
+            <b>14 apps</b>
+            <span
+              >Internal application portfolio owned at Floor &amp; Decor, with
+              the team and the standards that kept them consistent.</span
+            >
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Selected work</h2>
+        <ul class="work">
+          <li>
+            <h3><a href="/">bendoylegray.com</a></h3>
+            <span class="role">Design and build</span>
+            <p>
+              A contact sheet from a roll of film. The grease-pencil mark on
+              each frame is drawn in SVG and revealed with a dash animation
+              whose length is measured from the path at runtime, because these
+              are splines through sampled points and the drawn curve runs longer
+              than the shape it was fitted to. The wordmark's three lines are
+              letterspaced to a common measure taken from the rendered font, so
+              the name holds as a rectangle whichever face loads. Plain HTML,
+              CSS, and JavaScript. No build step, no dependencies.
+            </p>
+          </li>
+          <li>
+            <h3>
+              <a href="https://codelesstraveled.com">codelesstraveled.com</a>
+            </h3>
+            <span class="role">Design and build</span>
+            <p>
+              Swiss typographic layout on a hairline grid, with a custom logo
+              mark positioned against live font metrics measured at runtime via
+              Canvas TextMetrics, so the mark sits correctly against the
+              wordmark no matter how the browser resolves the typeface.
+            </p>
+          </li>
+          <li>
+            <h3><a href="https://benatlarge.com">benatlarge.com</a></h3>
+            <span class="role">Design and build</span>
+            <p>
+              A keyboard-accessible master and detail gallery built from real
+              button elements rather than click handlers on divs, degrading to a
+              plain stacked gallery with JavaScript disabled. Accessibility as a
+              structural decision instead of an audit item.
+            </p>
+          </li>
+          <li>
+            <h3>
+              <a href="https://crowandmoonenchantments.net"
+                >Crow and Moon Enchantments</a
+              >
+            </h3>
+            <span class="role">Client engagement</span>
+            <p>
+              Eleventy 3.x static build for a handmade-goods business, with a
+              modular SCSS architecture on the Sass @use module system and
+              product copy written in the owner's voice.
+            </p>
+          </li>
+          <li>
+            <h3>
+              <a href="https://joelbakercounseling.com"
+                >Joel Baker Counseling</a
+              >
+            </h3>
+            <span class="role">Client engagement</span>
+            <p>
+              Eleventy 3.x static build for a mental health professional, with a
+              modular SCSS architecture on the Sass. Copy was written mostly by
+              the owner, with some editing and formatting by me. The site is
+              fully accessible and keyboard-navigable, with a focus on clear
+              information architecture and user experience.
+            </p>
+          </li>
+          <li>
+            <h3><a href="https://ndhub.io">ND Hub</a></h3>
+            <span class="role">Design, build and host</span>
+            <p>
+              A Discourse forum for conversation about neurodiversity in the
+              workplace, with a custom theme and a few plugins to make the
+              experience more accessible and user-friendly. I also host the site
+              on a VPS I manage, keeping it up to date and secure. Uses Docker
+              and Nginx for deployment, with automated backups and monitoring.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="close">
+        <h2>Start something</h2>
+        <p>
+          Tell me what you are building and where it is stuck. If it is not a
+          fit I will say so, and I will usually know who is.
+        </p>
+        <p>
+          <a class="big" href="mailto:ben@bendoylegray.com"
+            >ben@bendoylegray.com</a
+          >
+        </p>
+      </section>
+
+      <footer>
+        <span>&copy; <span id="y"></span> Ben Doyle Gray LLC</span>
+        <a href="/">Everything else</a>
+        <a href="https://www.linkedin.com/in/bendoylegray/">LinkedIn</a>
+        <a href="/benjamin-gray-resume.html">Résumé</a>
+      </footer>
+    </div>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Ben Doyle Gray LLC",
+        "url": "https://bendoylegray.com/design-engineering.html",
+        "description": "Contract design engineering: interface design and production front-end code, delivered by one person.",
+        "areaServed": "US",
+        "provider": {
+          "@type": "Person",
+          "name": "Ben Doyle Gray",
+          "jobTitle": "Design Engineer",
+          "url": "https://bendoylegray.com"
+        },
+        "knowsAbout": [
+          "Design engineering",
+          "User interface design",
+          "Front-end development",
+          "Design systems",
+          "Web accessibility",
+          "Web performance"
+        ]
+      }
+    </script>
+
+    <script>
+      document.getElementById("y").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>

@@ -470,11 +470,14 @@ a {
    Every frame gets its own mark. They differ in laps, tilt, wobble,
    pass count and weight, so no two circles look like the same hand.
    Each centreline is a different length, which the dash animation has
-   to know about — hence --len, set per frame below. Measure the PATH
-   THAT SHIPS, not the curve it approximates: these are Catmull-Rom
-   splines through sampled points, and a spline can run a couple of
-   units longer than the curve it was fitted to. --len must exceed that
-   real length with a little to spare. Fall short and the dash pattern
+   to know about — hence --len, set per frame below. main.js measures
+   the PATH THAT SHIPS with getTotalLength() on load and overwrites
+   these values, because these are Catmull-Rom splines through sampled
+   points and a spline runs a couple of units longer than the curve it
+   was fitted to, which you cannot read off the source. The numbers
+   below are the hand-measured fallback for a no-JS load: keep them,
+   and keep them honest. --len must exceed the real length with a
+   little to spare. Fall short and the dash pattern
    ([dash --len][gap --len]) repeats, putting the tail of the stroke in
    a second dash — visible at rest, before any hover. Overshoot badly
    and the sweep finishes early, then sits there doing nothing.
