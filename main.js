@@ -90,7 +90,7 @@
   function pick() {
     var next = current;
     while (next === current) {
-      next = Math.floor(Math.random() * photos.length);
+      next = current = (current + 1) % photos.length;
     }
     return next;
   }
