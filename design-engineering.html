@@ -8,10 +8,7 @@
       name="description"
       content="Contract design engineering: information architecture, visual design, copy, component systems, and the production code that ships them. One person, no handoff. Remote or Chicago area."
     />
-    <link
-      rel="canonical"
-      href="https://bendoylegray.com/design-engineering.html"
-    />
+    <link rel="canonical" href="https://bendoylegray.com/design-engineering" />
     <meta name="theme-color" content="#e4e5e0" />
 
     <meta property="og:type" content="website" />
@@ -23,7 +20,7 @@
     />
     <meta
       property="og:url"
-      content="https://bendoylegray.com/design-engineering.html"
+      content="https://bendoylegray.com/design-engineering"
     />
     <meta property="og:image" content="https://bendoylegray.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
@@ -281,50 +278,20 @@
         color: var(--ink-soft);
       }
 
-      /* ---- work ---- */
-      .work {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-      .work > li {
-        padding: 1.15rem 0;
-        border-top: 1px solid var(--rule);
-      }
-      .work > li:first-child {
-        border-top: 0;
-        padding-top: 0;
-      }
-      .work h3 {
-        font-family: "Big Shoulders Display", Impact, sans-serif;
-        font-weight: 600;
-        font-size: 1.45rem;
-        letter-spacing: 0.02em;
-        margin: 0 0 0.3rem;
-        text-transform: uppercase;
-      }
-      .work h3 a {
-        color: inherit;
-        text-decoration: none;
-        border-bottom: 2px solid var(--rule);
-      }
-      .work h3 a:hover,
-      .work h3 a:focus-visible {
-        color: var(--china);
-        border-bottom-color: var(--china);
-      }
-      .work .role {
+      .more {
+        margin: 1.4rem 0 1rem;
         font-family: "IBM Plex Mono", ui-monospace, monospace;
-        font-size: 0.68rem;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: var(--ink-faint);
-        display: block;
-        margin-bottom: 0.5rem;
+        font-size: 0.78rem;
+        letter-spacing: 0.06em;
       }
-      .work p {
-        margin: 0;
-        color: var(--ink-soft);
+      .more a {
+        color: var(--ink);
+        text-decoration: none;
+        border-bottom: 1px solid var(--china);
+      }
+      .more a:hover,
+      .more a:focus-visible {
+        color: var(--china);
       }
 
       /* ---- numbers ---- */
@@ -427,10 +394,11 @@
         <p class="edge">
           <a href="/">&larr; Ben Doyle Gray</a>
           <span>Design engineering</span>
+          <a href="/the-work">The Work</a>
           <span>Warrenville, IL</span>
         </p>
 
-        <h1>The drawing<br />and the building</h1>
+        <h1>The designing<br />and the building</h1>
 
         <p class="tagline">
           I am a design engineer. I take an interface from information
@@ -442,6 +410,7 @@
         <p class="contact">
           <a href="mailto:ben@bendoylegray.com">ben@bendoylegray.com</a>
           <a href="https://www.linkedin.com/in/bendoylegray/">LinkedIn</a>
+          <a href="/the-work">The Work</a>
           <a href="/benjamin-gray-resume.html">Résumé</a>
           <span>Remote or Chicago area</span>
         </p>
@@ -551,83 +520,13 @@
 
       <section>
         <h2>Selected work</h2>
-        <ul class="work">
-          <li>
-            <h3><a href="/">bendoylegray.com</a></h3>
-            <span class="role">Design and build</span>
-            <p>
-              A contact sheet from a roll of film. The grease-pencil mark on
-              each frame is drawn in SVG and revealed with a dash animation
-              whose length is measured from the path at runtime, because these
-              are splines through sampled points and the drawn curve runs longer
-              than the shape it was fitted to. The wordmark's three lines are
-              letterspaced to a common measure taken from the rendered font, so
-              the name holds as a rectangle whichever face loads. Plain HTML,
-              CSS, and JavaScript. No build step, no dependencies.
-            </p>
-          </li>
-          <li>
-            <h3>
-              <a href="https://codelesstraveled.com">codelesstraveled.com</a>
-            </h3>
-            <span class="role">Design and build</span>
-            <p>
-              Swiss typographic layout on a hairline grid, with a custom logo
-              mark positioned against live font metrics measured at runtime via
-              Canvas TextMetrics, so the mark sits correctly against the
-              wordmark no matter how the browser resolves the typeface.
-            </p>
-          </li>
-          <li>
-            <h3><a href="https://benatlarge.com">benatlarge.com</a></h3>
-            <span class="role">Design and build</span>
-            <p>
-              A keyboard-accessible master and detail gallery built from real
-              button elements rather than click handlers on divs, degrading to a
-              plain stacked gallery with JavaScript disabled. Accessibility as a
-              structural decision instead of an audit item.
-            </p>
-          </li>
-          <li>
-            <h3>
-              <a href="https://crowandmoonenchantments.net"
-                >Crow and Moon Enchantments</a
-              >
-            </h3>
-            <span class="role">Client engagement</span>
-            <p>
-              Eleventy 3.x static build for a handmade-goods business, with a
-              modular SCSS architecture on the Sass @use module system and
-              product copy written in the owner's voice.
-            </p>
-          </li>
-          <li>
-            <h3>
-              <a href="https://joelbakercounseling.com"
-                >Joel Baker Counseling</a
-              >
-            </h3>
-            <span class="role">Client engagement</span>
-            <p>
-              Eleventy 3.x static build for a mental health professional, with a
-              modular SCSS architecture on the Sass. Copy was written mostly by
-              the owner, with some editing and formatting by me. The site is
-              fully accessible and keyboard-navigable, with a focus on clear
-              information architecture and user experience.
-            </p>
-          </li>
-          <li>
-            <h3><a href="https://ndhub.io">ND Hub</a></h3>
-            <span class="role">Design, build and host</span>
-            <p>
-              A Discourse forum for conversation about neurodiversity in the
-              workplace, with a custom theme and a few plugins to make the
-              experience more accessible and user-friendly. I also host the site
-              on a VPS I manage, keeping it up to date and secure. Uses Docker
-              and Nginx for deployment, with automated backups and monitoring.
-            </p>
-          </li>
-        </ul>
+        <p>
+          Case studies, with screenshots: what I drew, what I built, and the
+          decisions in each I would make again.
+        </p>
+        <p class="more">
+          <a href="/the-work">See the the work &rarr;</a>
+        </p>
       </section>
 
       <section class="close">
@@ -646,6 +545,7 @@
       <footer>
         <span>&copy; <span id="y"></span> Ben Doyle Gray LLC</span>
         <a href="/">Everything else</a>
+        <a href="/the-work">The Work</a>
         <a href="https://www.linkedin.com/in/bendoylegray/">LinkedIn</a>
         <a href="/benjamin-gray-resume.html">Résumé</a>
       </footer>
@@ -656,7 +556,7 @@
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
         "name": "Ben Doyle Gray LLC",
-        "url": "https://bendoylegray.com/design-engineering.html",
+        "url": "https://bendoylegray.com/design-engineering",
         "description": "Contract design engineering: interface design and production front-end code, delivered by one person.",
         "areaServed": "US",
         "provider": {

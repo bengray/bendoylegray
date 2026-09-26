@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" fill="#f4efe3"/>
+  <!-- Heavier than the wordmark's fork: at 16px the two roads close
+       into one blob at the type's own stroke weight. -->
+  <g fill="none" stroke-width="16">
+    <path stroke="#d6cbb4" d="M50 56 L50 8"/>
+    <path stroke="#a50e14" d="M50 94 L50 56 L8 14" stroke-linejoin="miter"/>
+  </g>
+</svg>

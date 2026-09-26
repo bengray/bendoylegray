@@ -21,6 +21,20 @@ Colours and the strip tilt   -> :root at the top of styles.css
 Photos                       -> drop files in photos/, then edit the
                                 JSON block near the top of index.html
 Links, copy, dates           -> index.html directly
+Portfolio screenshots        -> drop these into prints/ (1600x1000 JPG):
+                                  code-less-traveled.jpg
+                                  crow-and-moon.jpg
+                                  joel-baker.jpg
+                                  ben-atlarge.jpg
+                                A missing file hides its slot, so the
+                                page ships fine with any of them absent.
+Code Less Traveled archive   -> code-less-traveled/ is the old site kept
+                                as a design piece: no prices, no contact,
+                                noindex. Link to it WITH the trailing
+                                slash: /code-less-traveled/
+Clean URLs                   -> firebase.json has cleanUrls on, so
+                                /work serves work.html. Locally
+                                with http.server, use /work.html.
 
 STILL TO REPLACE
 ----------------

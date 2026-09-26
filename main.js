@@ -88,7 +88,14 @@
   var current = 0;
 
   function advanceFrame() {
-    return current + 1;
+    console.log("current = ", current);
+    console.log("length = ", photos.length - 1);
+    if (current != photos.length - 1) {
+      return current + 1;
+    } else {
+      current = 0;
+      return 0;
+    }
   }
 
   function show(index, animate) {

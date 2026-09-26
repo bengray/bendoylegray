@@ -1,0 +1,745 @@
+/* ============================================================
+   codelesstraveled.com
+   Plain CSS. No build step, no dependencies — which is also what the
+   site is selling, so it had better be true here.
+
+   The page is a survey sheet. Contours run edge to edge at full
+   strength; the writing sits on translucent overlay sheets laid over
+   them. That is a drafting convention, not a UI one: tracing paper
+   or mylar over a survey, so you can write on it without losing the
+   ground underneath.
+   ============================================================ */
+
+:root {
+  --paper: #fefffa; /* survey paper */
+  --ink: #241f18;
+  --soft: #474339; /* 6.0:1 even where a contour runs beneath it */
+  --contour: #8b7e6f; /* the ink the land is printed in */
+  --water: #5b7f8a;
+  --red: #a50e14; /* the road taken. and nothing else. */
+  --rule: #d6cbb4;
+
+  --label: "Archivo", system-ui, sans-serif;
+  --body: "Literata", Georgia, serif;
+  --data: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Optical trim on the drawn l. A diagonal at the same width as a
+     vertical always looks heavier than it measures. */
+  --fork-weight: 0.86;
+
+  --gut: clamp(20px, 5vw, 72px);
+  --rail: clamp(28px, 5vw, 64px); /* where the route line runs */
+  --pad: clamp(18px, 3vw, 32px); /* inside an overlay sheet */
+
+  /* The overlay. 0.62 measured against a dense band of index contours:
+     body text lands at 7.9:1, so the sheet can stay genuinely
+     translucent rather than nearly opaque. Seeing the ground through
+     it is the entire point. */
+  --vellum: rgb(244 239 227 / 0.5);
+  --vellum-edge: rgb(190 174 141 / 0.55);
+  --blur: 3px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+}
+:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  background: var(--ink);
+  color: var(--paper);
+  padding: 10px 16px;
+  z-index: 40;
+}
+.skip:focus {
+  left: 16px;
+  top: 16px;
+}
+
+/* ---------- the land ---------- */
+
+.terrain {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  color: var(--contour);
+  opacity: 0.2;
+}
+/* Oversized so panning never exposes an edge. */
+.terrain svg {
+  display: block;
+  width: 128%;
+  height: 128%;
+  margin: -14% 0 0 -14%;
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+}
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 var(--gut);
+}
+
+/* ---------- the overlay sheet ---------- */
+/* The inset highlight along the top edge and the low soft shadow are
+   what make this read as a physical sheet rather than a glass panel.
+   Without them it is just a frosted rectangle. */
+
+.sheet {
+  background: var(--vellum);
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(0.92);
+  backdrop-filter: blur(var(--blur)) saturate(0.99);
+  border: 1px solid var(--vellum-edge);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.55),
+    0 10px 30px rgb(70 55 30 / 0.07);
+  padding: var(--pad);
+}
+
+.sheet--tight {
+  padding: 10px 16px;
+}
+
+/* If the browser cannot blur, the sheet turns nearly opaque instead.
+   Text never ends up sitting on raw contours. */
+@supports not (
+  (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
+) {
+  .sheet {
+    background: rgb(244 239 227 / 0.94);
+  }
+}
+
+/* Some people find translucency uncomfortable or hard to read, and the
+   OS lets them say so. Honour it. */
+@media (prefers-reduced-transparency: reduce) {
+  .sheet {
+    background: var(--paper);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+/* ---------- map label conventions ---------- */
+
+.lbl {
+  font-family: var(--label);
+  font-variation-settings:
+    "wdth" 84,
+    "wght" 600;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+a.lbl {
+  text-decoration: none;
+}
+a.lbl:hover {
+  color: var(--red);
+}
+.coord {
+  font-family: var(--data);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--soft);
+}
+
+/* ---------- the strip map ---------- */
+/* Fixed to the side, its own small sheet. The route wanders because a
+   route does; a straight line would read as a loading bar. Waypoints
+   are real links to the stops, so this is wayfinding rather than
+   ornament. */
+
+.strip {
+  position: fixed;
+  right: clamp(10px, 1.6vw, 26px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 72px;
+  padding: 10px 4px 8px;
+  background: var(--soft);
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(0.92);
+  backdrop-filter: blur(var(--blur)) saturate(0.92);
+  border: 1px solid var(--vellum-edge);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.55),
+    0 10px 30px rgb(70 55 30 / 0.07);
+}
+.strip__lbl {
+  font-family: var(--label);
+  font-variation-settings:
+    "wdth" 84,
+    "wght" 600;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 6px;
+  color: var(--paper);
+}
+.strip__svg {
+  display: block;
+  width: 100%;
+  height: min(62vh, 520px);
+}
+.strip__land {
+  color: var(--contour);
+  opacity: 0.85;
+}
+
+.strip__ahead {
+  stroke: var(--rule);
+  stroke-width: 2;
+  stroke-dasharray: 4 5;
+}
+.strip__done {
+  stroke: var(--red);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+.strip__here {
+  fill: var(--red);
+  stroke: var(--paper);
+  stroke-width: 2.4;
+}
+
+.strip__stop {
+  fill: var(--paper);
+  stroke: var(--red);
+  stroke-width: 1.8;
+}
+.strip__stop.is-passed {
+  fill: var(--red);
+}
+.strip__hit {
+  fill: transparent;
+  cursor: pointer;
+}
+.strip a:focus-visible .strip__stop {
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+
+/* No room beside the content on a narrow screen, and a 72px strip would
+   crowd it. The route rail down the page already does this job there. */
+@media (max-width: 62rem) {
+  .strip {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .strip {
+    background: var(--paper);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+@supports not (
+  (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))
+) {
+  .strip {
+    background: rgb(244 239 227 / 0.94);
+  }
+}
+
+/* ---------- masthead ---------- */
+
+.head {
+  padding: clamp(28px, 5vw, 56px) 0 clamp(28px, 4vw, 48px);
+}
+.head__top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.title {
+  margin: clamp(26px, 5vw, 48px) 0 clamp(22px, 4vw, 36px);
+  font-family: var(--label);
+  font-variation-settings:
+    "wdth" 92,
+    "wght" 800;
+  font-size: clamp(38px, 7.2vw, 84px);
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+}
+.title .soft {
+  color: var(--soft);
+  font-variation-settings:
+    "wdth" 92,
+    "wght" 400;
+  margin-left: -2px; /* pulls the "ess" closer to the letter "l" which has been converted to an svg */
+}
+
+/* the l of "less" is the road — drawn in main.js from the font's own
+   metrics, so it keeps the letter's advance, stem weight and height */
+.fork {
+  display: inline-block;
+}
+.fork svg {
+  display: block;
+  overflow: visible;
+}
+.fork__ghost {
+  stroke: var(--rule);
+}
+.fork__road {
+  stroke: var(--red);
+}
+
+.head__intro {
+  max-width: 62ch;
+}
+.sub {
+  font-size: clamp(18px, 1.9vw, 22px);
+  line-height: 1.45;
+  max-width: 44ch;
+}
+.sub b {
+  color: var(--red);
+}
+.legendbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  margin-top: 20px;
+}
+.key {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  font-family: var(--data);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--soft);
+}
+.key i {
+  display: block;
+  width: 26px;
+  border-top: 3px solid var(--red);
+}
+.key.ghost i {
+  border-top-color: var(--rule);
+  border-top-style: dashed;
+}
+
+/* ---------- the route ---------- */
+/* One line runs the length of the page and every section hangs off it.
+   It is the spine of the layout and the metaphor at the same time. */
+
+.route {
+  position: relative;
+  padding-left: var(--rail);
+  --progress: 0%;
+}
+
+/* The whole route, dotted — ground not yet covered. */
+.route::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--rail) / 2 - 1.5px);
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--red) 0 7px,
+    transparent 7px 14px
+  );
+}
+
+/* Ground covered, inked in. Only drawn once the script is running —
+   without it the route below stays solid, as it was. */
+.route.has-marker::before {
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--rule) 0 7px,
+    transparent 7px 14px
+  );
+}
+.route.has-marker::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--rail) / 2 - 1.5px);
+  top: 0;
+  width: 3px;
+  height: var(--progress);
+  background: var(--red);
+}
+
+/* The position marker. A dot on the line, the way a map shows where
+   you are — ringed in paper so it stays legible over the route. */
+.route.has-marker .here {
+  position: absolute;
+  left: calc(var(--rail) / 2);
+  top: var(--progress);
+  width: 13px;
+  height: 13px;
+  margin: -6.5px 0 0 -6.5px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow:
+    0 0 0 4px var(--paper),
+    0 0 0 5.5px var(--red),
+    0 2px 8px rgb(70 55 30 / 0.25);
+  z-index: 3;
+  pointer-events: none;
+}
+.route:not(.has-marker) .here {
+  display: none;
+}
+
+.stop {
+  position: relative;
+  margin: 18px 0;
+}
+.stop::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--rail) / -2 - 8px - var(--pad));
+  top: var(--pad);
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 3px solid var(--red);
+}
+.stop--end::before {
+  background: var(--red);
+}
+
+/* A waypoint fills in once you have gone past it. */
+.stop.is-passed::before {
+  background: var(--red);
+}
+
+.stop__n {
+  font-family: var(--data);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--red);
+}
+.stop__t {
+  font-family: var(--label);
+  font-variation-settings:
+    "wdth" 88,
+    "wght" 700;
+  font-size: clamp(26px, 3.4vw, 40px);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  margin-top: 6px;
+}
+.stop__lede {
+  margin-top: 14px;
+  max-width: 56ch;
+  color: var(--soft);
+}
+
+/* ---------- 01 · hazards ---------- */
+
+.hazards {
+  list-style: none;
+  margin-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+@media (min-width: 52rem) {
+  .hazards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 40px;
+  }
+}
+.hazards li {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.hazards b {
+  display: block;
+  font-family: var(--label);
+  font-variation-settings:
+    "wdth" 92,
+    "wght" 600;
+  font-size: 16px;
+}
+.hazards span span,
+.hazards li > span > span {
+  font-size: 15px;
+  color: var(--soft);
+  line-height: 1.5;
+}
+.pin {
+  width: 22px;
+  height: 22px;
+  margin-top: 3px;
+  border: 2px solid var(--water);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+}
+
+/* ---------- 02 · stages ---------- */
+
+.stages {
+  list-style: none;
+  counter-reset: st;
+  margin-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.stages li {
+  counter-increment: st;
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: baseline;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.stages li::before {
+  content: counter(st, decimal-leading-zero);
+  font-family: var(--data);
+  font-size: 12px;
+  color: var(--red);
+}
+.stages b {
+  display: block;
+  font-family: var(--label);
+  font-variation-settings:
+    "wdth" 92,
+    "wght" 600;
+  font-size: 17px;
+}
+.stages li > span > span {
+  display: block;
+  font-size: 15px;
+  color: var(--soft);
+  line-height: 1.5;
+}
+.stages em {
+  font-family: var(--data);
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--soft);
+  white-space: nowrap;
+}
+
+/* ---------- 03 · legend ---------- */
+/* The one solid box on the page. A legend on a real sheet is printed
+   on the paper, not on an overlay. */
+
+.legend {
+  margin-top: 24px;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+}
+.legend__h {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 12px 18px;
+  border-bottom: 2px solid var(--ink);
+}
+.legend table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.legend th,
+.legend td {
+  text-align: left;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+.legend tr:last-child th,
+.legend tr:last-child td {
+  border-bottom: 0;
+}
+.legend th {
+  font-family: var(--label);
+  font-variation-settings:
+    "wdth" 92,
+    "wght" 600;
+  font-size: 17px;
+  width: 32%;
+}
+.legend th small {
+  display: block;
+  font-family: var(--body);
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--soft);
+  margin-top: 2px;
+}
+.legend td {
+  font-size: 15px;
+  color: var(--soft);
+}
+.legend td.amt {
+  text-align: right;
+  white-space: nowrap;
+  font-family: var(--data);
+  font-size: 16px;
+  color: var(--ink);
+}
+.legend__f {
+  padding: 12px 18px;
+  border-top: 1px solid var(--rule);
+  font-size: 14px;
+  color: var(--soft);
+}
+@media (max-width: 44rem) {
+  .legend th,
+  .legend td {
+    display: block;
+    width: auto;
+    padding-bottom: 4px;
+  }
+  .legend td.amt {
+    text-align: left;
+    padding-top: 8px;
+    padding-bottom: 14px;
+  }
+  .legend tr {
+    display: block;
+    border-bottom: 1px solid var(--rule);
+  }
+  .legend tr:last-child {
+    border-bottom: 0;
+  }
+  .legend th,
+  .legend td {
+    border-bottom: 0;
+  }
+}
+
+/* ---------- 04 · ground covered ---------- */
+
+.covered {
+  list-style: none;
+  margin-top: 24px;
+  display: grid;
+  gap: 26px;
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 46rem) {
+  .covered {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.covered img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--rule);
+  margin-bottom: 10px;
+}
+.covered b {
+  display: block;
+  font-family: var(--label);
+  font-variation-settings:
+    "wdth" 92,
+    "wght" 600;
+  font-size: 17px;
+}
+.covered .coord {
+  display: block;
+  margin-top: 2px;
+}
+.covered .say {
+  display: block;
+  margin-top: 8px;
+  font-size: 15px;
+  color: var(--soft);
+  line-height: 1.5;
+}
+
+/* ---------- 05 · set out ---------- */
+
+.go {
+  margin-top: 22px;
+}
+.go a {
+  display: inline-block;
+  font-family: var(--label);
+  font-variation-settings:
+    "wdth" 92,
+    "wght" 700;
+  font-size: clamp(19px, 2.6vw, 30px);
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  border-bottom: 4px solid var(--red);
+  padding-bottom: 3px;
+  word-break: break-word;
+}
+.go a:hover {
+  color: var(--red);
+}
+.go p {
+  margin-top: 12px;
+  font-size: 14px;
+  color: var(--soft);
+}
+
+/* ---------- foot ---------- */
+
+.foot {
+  padding: clamp(28px, 5vw, 52px) 0;
+}
+.foot__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  justify-content: space-between;
+  align-items: baseline;
+}
