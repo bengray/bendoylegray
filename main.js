@@ -87,12 +87,8 @@
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var current = 0;
 
-  function pick() {
-    var next = current;
-    while (next === current) {
-      next = current = (current + 1) % photos.length;
-    }
-    return next;
+  function advanceFrame() {
+    return current + 1;
   }
 
   function show(index, animate) {
@@ -128,7 +124,7 @@
 
   if (button) {
     button.addEventListener("click", function () {
-      show(pick(), true);
+      show(advanceFrame(), true);
     });
   }
 })();
