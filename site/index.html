@@ -47,7 +47,7 @@
       href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100..900&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
   </head>
   <body>
     <!-- Six grease-pencil marks, one per frame — no two hands alike.
@@ -317,9 +317,9 @@
           </div>
 
           <p class="standfirst">
-            I'm a design engineer: I design and create the web interface then write
-            the code that ships it. I also take pictures of other people's dogs
-            and write about systems that were designed with someone else in
+            I'm a design engineer: I design and create the web interface then
+            write the code that ships it. I also take pictures of other people's
+            dogs and write about systems that were designed with someone else in
             mind.
             <em>Choose a frame below.</em>
           </p>
@@ -330,14 +330,14 @@
             <a
               class="plate__link"
               id="plate-link"
-              href="https://www.instagram.com/p/DdMuKNdnBaq/"
+              href="https://www.instagram.com/p/DeGqiLFHH6O/"
               target="_blank"
               rel="noopener"
             >
               <div class="plate__window">
                 <img
                   id="plate-img"
-                  src="photos/blue-eyes-1-web.jpg"
+                  src="/photos/instagram/latest.jpg"
                   width="1200"
                   height="800"
                   fetchpriority="high"
@@ -347,87 +347,22 @@
               </div>
             </a>
             <figcaption class="plate__caption">
-              <span class="plate__handle">&commat;ben.atlarge</span>
+              <a
+                class="plate__handle"
+                href="https://instagram.com/ben.atlarge"
+                target="_blank"
+                rel="noopener"
+                >&commat;ben.atlarge &middot; latest</a
+              >
+              <a class="plate__sheet" href="/proofs">Proof sheet &rarr;</a>
               <button class="plate__advance" type="button" id="plate-advance">
                 Next frame &rarr;
               </button>
             </figcaption>
 
-            <!-- Edit this list to change the photos. Nothing else to touch. -->
-            <script type="application/json" id="plate-data">
-              [
-                {
-                  "src": "photos/blue-eyes-1-web.jpg",
-                  "alt": "A close-up of a cat with striking blue eyes",
-                  "permalink": "https://www.instagram.com/p/DeGqiLFHH6O/"
-                },
-                {
-                  "src": "photos/bruiser.jpg",
-                  "alt": "A small chihuahua I nicknamed 'Bruiser'",
-                  "permalink": "https://www.instagram.com/p/DdMuKNdnBaq/"
-                },
-                {
-                  "src": "photos/lucy-maggie.jpg",
-                  "alt": "Two dogs touching noses in close profile, one tan and one black",
-                  "permalink": "https://www.instagram.com/p/DbbBjBYlOI9/"
-                },
-                {
-                  "src": "photos/loki.jpg",
-                  "alt": "A tabby cat sitting upright beside a window, looking at the camera",
-                  "permalink": "https://instagram.com/ben.atlarge"
-                },
-                {
-                  "src": "photos/georgie.jpg",
-                  "alt": "A small white dog with floppy ears, looking up at the camera",
-                  "permalink": "https://www.instagram.com/p/DbbBP7VFEki/"
-                },
-                {
-                  "src": "photos/exit.jpg",
-                  "alt": "A long-haired grey and white cat lying on its side, head tilted back",
-                  "permalink": "https://www.instagram.com/p/Ddpb65eNi0T/"
-                },
-                {
-                  "src": "photos/aphie.jpg",
-                  "alt": "A long-haired tabby cat with pale green eyes staring straight at the camera",
-                  "permalink": "https://www.instagram.com/p/DbBcn9NERdm/"
-                },
-                {
-                  "src": "photos/darth-pepper-motion.jpg",
-                  "alt": "A small white Lego figure sprawled across the top of a ripe red pepper, against a plain white background",
-                  "permalink": "https://www.instagram.com/p/DbTdEfekQv7/?img_index=1"
-                },
-                {
-                  "src": "photos/rainbow-skull.jpg",
-                  "alt": "A chrome skull finished in iridescent rainbow colours, facing the camera",
-                  "permalink": "https://www.instagram.com/p/Da_juB3jbwg/"
-                },
-                {
-                  "src": "photos/emergence.jpg",
-                  "alt": "A cluster of vivid pink geranium blossoms against a soft grey background",
-                  "permalink": "https://www.instagram.com/p/DZ-6-HKEX_Q/"
-                },
-                {
-                  "src": "photos/pebble.jpg",
-                  "alt": "A small dark figurine on a wooden bench, a larger pale figure blurred behind it",
-                  "permalink": "https://www.instagram.com/p/DZEaG9FDRXu/"
-                },
-                {
-                  "src": "photos/waffle-house.jpg",
-                  "alt": "A Waffle House sign lit yellow against a pink and orange sunset",
-                  "permalink": "https://www.instagram.com/p/DXvZ7gVDRQz/"
-                },
-                {
-                  "src": "photos/bicycle.jpg",
-                  "alt": "A bicycle propped against a weathered brick wall beside a barred window",
-                  "permalink": "https://www.instagram.com/p/DXvYi92jRSq/"
-                },
-                {
-                  "src": "photos/mercedes-stadium.jpg",
-                  "alt": "Sunbeams breaking through heavy cloud over a grey city skyline",
-                  "permalink": "https://www.instagram.com/p/DXvZqjzDWU8/"
-                }
-              ]
-            </script>
+            <!-- The photos rotate in from instagram.json, which a GitHub
+                 Action rewrites with the latest from @ben.atlarge. See
+                 scripts/instagram.mjs. Nothing to edit here. -->
           </figure>
 
           <ul class="roles">
@@ -436,8 +371,8 @@
               <span class="roles__what"
                 >Design engineer
                 <span class="roles__note"
-                  >The drawing and the building, same hands. Websites for
-                  small nonprofits, independent publications, and local
+                  >The drawing and the building, same hands. Websites for small
+                  nonprofits, independent publications, and local
                   businesses.</span
                 >
               </span>
@@ -448,7 +383,8 @@
               <span class="roles__what"
                 >Photographer
                 <span class="roles__note"
-                  >Mostly dogs. They're better subjects than we are.</span
+                  >Mostly dogs. They're better subjects than we are.
+                  <a href="/proofs">See the proof sheet.</a></span
                 >
               </span>
             </li>
@@ -655,7 +591,7 @@
           >&rarr; 1 &middot; 1A &middot; 2 &middot; 2A &middot; 3 &middot;
           3A</span
         >
-        <span class="margin-line__drop">Founded 2019</span>
+        <span class="margin-line__drop">Developed in 2019</span>
       </div>
     </div>
 
@@ -700,6 +636,6 @@
       }
     </script>
 
-    <script src="main.js" defer></script>
+    <script src="/assets/js/main.js" defer></script>
   </body>
 </html>

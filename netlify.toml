@@ -1,0 +1,5 @@
+# Netlify publishes site/ as-is. No build step.
+# Everything outside site/ (README, scripts/, tools/) stays in the repo
+# and off the web.
+[build]
+  publish = "site"

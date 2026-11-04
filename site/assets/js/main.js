@@ -68,21 +68,28 @@
   var img = document.getElementById("plate-img");
   var link = document.getElementById("plate-link");
   var button = document.getElementById("plate-advance");
-  var data = document.getElementById("plate-data");
 
   /* I don't want to have to manually update the year in the footer */
   document.getElementById("current-year").textContent =
     new Date().getFullYear();
 
-  if (!plate || !img || !data) return;
+  if (!plate || !img) return;
 
-  var photos;
-  try {
-    photos = JSON.parse(data.textContent);
-  } catch (e) {
-    return;
-  }
-  if (!Array.isArray(photos) || photos.length < 2) return;
+  /* The list comes from instagram.json, which a GitHub Action rewrites
+     every few hours with the newest photos from @ben.atlarge (see
+     scripts/instagram.mjs). If it can't be fetched (file://, offline),
+     the plate keeps the photo already painted and the button stays
+     hidden. */
+  fetch("/instagram.json", { cache: "no-cache" })
+    .then(function (res) {
+      return res.ok ? res.json() : null;
+    })
+    .then(function (photos) {
+      if (Array.isArray(photos) && photos.length >= 2) start(photos);
+    })
+    .catch(function () {});
+
+  function start(photos) {
 
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var current = 0;
@@ -133,5 +140,6 @@
     button.addEventListener("click", function () {
       show(advanceFrame(), true);
     });
+  }
   }
 })();

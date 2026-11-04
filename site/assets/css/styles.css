@@ -309,6 +309,27 @@ a {
   color: var(--amber);
 }
 
+.plate__handle,
+.plate__sheet {
+  text-decoration: none;
+}
+
+.plate__sheet {
+  color: var(--paper);
+  transition: color 0.2s ease;
+}
+
+.plate__sheet:hover,
+.plate__handle:hover {
+  color: var(--amber);
+}
+
+.roles__note a {
+  color: var(--amber-ink);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
 /* no JS, no button */
 .plate:not(.is-ready) .plate__advance {
   visibility: hidden;
