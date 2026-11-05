@@ -209,11 +209,18 @@
 
 /* ---------- develop-in ---------- */
 
+/* Fill mode is BACKWARDS, not forwards, and there is no resting
+   opacity/filter here. That's load-bearing. `forwards` would hold the
+   last keyframe on the frame for good, and the browser never lands
+   filter on `none`: it interpolates to `contrast(1) brightness(1)`.
+   Any filter makes the frame a stacking context, which traps its
+   grease mark inside it, and the next frame in the strip then paints
+   over any part of the mark that spills right (grease-6 did exactly
+   that). `backwards` applies the washed-out first keyframe during the
+   stagger delay, then lets go completely when the animation ends. */
 @media (prefers-reduced-motion: no-preference) {
   .shot {
-    opacity: 0;
-    filter: contrast(0.4) brightness(1.35);
-    animation: develop 0.85s cubic-bezier(0.25, 0.6, 0.3, 1) forwards;
+    animation: develop 0.85s cubic-bezier(0.25, 0.6, 0.3, 1) backwards;
     animation-delay: calc(0.1s + min(var(--i, 0), 12) * 0.07s);
   }
 }
