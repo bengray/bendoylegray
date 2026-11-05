@@ -1,0 +1,257 @@
+/* ============================================================
+   home.css — the front page as a photography business.
+   Loads after styles.css (paper, strips, marks) and proofs.css
+   (.shot frames for the "recent keepers" strip). Only what the
+   front page needs that the other two don't already provide.
+   ============================================================ */
+
+/* ---------- hero: lockup and words left, one big print right ---------- */
+
+@media (min-width: 900px) {
+  .hero--print {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+}
+
+.hero--print .hero__side {
+  margin-top: 1.5rem;
+}
+
+/* the fourth line of the lockup, justified to the same width by main.js */
+.wordmark .wordmark__sub {
+  font-size: 34px;
+  font-weight: 800;
+  fill: var(--china);
+}
+
+.thesis {
+  font-family: var(--body);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(1.625rem, 1.2rem + 1.5vw, 2.375rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 1.25rem;
+}
+
+.hero--print .standfirst {
+  max-width: 36ch;
+}
+
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.875rem 1.5rem;
+  margin-top: clamp(1.5rem, 3vw, 2rem);
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.cta__primary {
+  display: inline-block;
+  padding: 0.9rem 1.25rem 0.85rem;
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+  box-shadow: 0 2px 10px rgba(20, 20, 16, 0.18);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.cta__primary:hover {
+  background: var(--rebate);
+  color: var(--amber);
+}
+
+.cta__secondary {
+  text-decoration: none;
+  border-bottom: 1px solid var(--amber-ink);
+  padding-bottom: 2px;
+}
+
+.cta__secondary:hover {
+  color: var(--amber-ink);
+}
+
+/* the big print: Instagram's own 4:5, so heads don't get cropped */
+.plate--print .plate__window {
+  aspect-ratio: 4 / 5;
+}
+
+/* ---------- how it works: four text frames on one strip ---------- */
+
+.negstrip--a .frames > .frame {
+  /* four to a strip leaves less room per frame than the old three */
+  padding: 1rem 1rem 0.875rem;
+}
+
+.frame--notice .frame__num {
+  color: var(--china);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .negstrip--a .frame:nth-child(4) {
+    animation-delay: 0.37s;
+  }
+}
+
+/* ---------- sessions: price cards taped to the paper ---------- */
+
+.rates {
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+}
+
+.rates__grid {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 2.5rem);
+  grid-template-columns: minmax(0, 1fr);
+  padding-top: 0.75rem;
+}
+
+@media (min-width: 900px) {
+  .rates__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.rate {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding: clamp(1.5rem, 3vw, 2rem) clamp(1.25rem, 2.5vw, 1.75rem);
+  background: #eeefe9;
+  border: 1px solid var(--paper-edge);
+  box-shadow:
+    0 1px 2px rgba(20, 20, 16, 0.08),
+    0 8px 22px rgba(20, 20, 16, 0.08);
+}
+
+.rate--a { transform: rotate(-0.6deg); }
+.rate--b { transform: rotate(0.35deg); }
+.rate--c { transform: rotate(-0.25deg); margin-top: 0.75rem; }
+
+/* a strip of masking tape across the top edge */
+.rate::before {
+  content: "";
+  position: absolute;
+  top: -0.7rem;
+  left: 50%;
+  width: 6rem;
+  height: 1.4rem;
+  transform: translateX(-50%) rotate(-2deg);
+  background: rgba(224, 168, 40, 0.22);
+  box-shadow: inset 0 0 0 1px rgba(138, 100, 16, 0.08);
+}
+
+.rate--b::before { transform: translateX(-46%) rotate(1.5deg); }
+.rate--c::before { transform: translateX(-54%) rotate(-1deg); }
+
+.rate--feature {
+  background: var(--rebate);
+  color: var(--paper);
+  border-color: var(--rebate);
+}
+
+.rate__kind {
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--amber-ink);
+}
+
+.rate--feature .rate__kind {
+  color: var(--amber);
+}
+
+.rate__price {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2.25rem, 1.6rem + 2vw, 3.25rem);
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+}
+
+.rate__price--small {
+  font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem);
+}
+
+/* the grease circle around the private-session price */
+.rate__mark {
+  position: relative;
+  display: inline-block;
+  padding: 0.1em 0.35em;
+}
+
+.rate__mark .mark {
+  stroke-dashoffset: 0;
+}
+
+.rate__body {
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.rate__list {
+  list-style: none;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: #c6c8be;
+}
+
+.rate__list li {
+  padding: 0.5rem 0;
+  border-top: 1px solid rgba(228, 229, 224, 0.13);
+}
+
+.rate__go {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: inherit;
+}
+
+.rate__go:hover {
+  color: var(--amber-ink);
+}
+
+.rate--feature .rate__go {
+  color: var(--amber);
+}
+
+.rate--feature .rate__go:hover {
+  color: var(--paper);
+}
+
+/* Unfilled placeholders shout, so they can't ship by accident. */
+.tbd {
+  color: var(--china);
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(191, 47, 44, 0.12) 0 6px,
+    transparent 6px 12px
+  );
+}
+
+/* ---------- recent keepers ---------- */
+
+.proof-head a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--amber-ink);
+}
+
+.keepers .shot {
+  cursor: pointer;
+}

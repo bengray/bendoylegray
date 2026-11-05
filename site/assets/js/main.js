@@ -18,7 +18,7 @@
       t.setAttribute("textLength", max);
     });
 
-    var height = 232;
+    var height = +svg.getAttribute("data-height") || 232;
 
     svg.setAttribute("viewBox", "0 0 " + max + " " + height);
   }
@@ -31,7 +31,7 @@
 })();
 
 (function () {
-  var frames = Array.prototype.slice.call(document.querySelectorAll(".frame"));
+  var frames = Array.prototype.slice.call(document.querySelectorAll(".frame, .shot, .rate__mark"));
   if (!frames.length) return;
 
   frames.forEach(function (frame) {

@@ -690,11 +690,13 @@ a {
 
 /* ---------- develop-in ---------- */
 
+/* BACKWARDS, not forwards, and no resting opacity/filter: a filled
+   `forwards` animation leaves filter at contrast(1) brightness(1),
+   which makes each frame a stacking context and traps its grease mark
+   under the next frame. See the note in proofs.css. */
 @media (prefers-reduced-motion: no-preference) {
   .frame {
-    opacity: 0;
-    filter: contrast(0.4) brightness(1.35);
-    animation: develop 0.85s cubic-bezier(0.25, 0.6, 0.3, 1) forwards;
+    animation: develop 0.85s cubic-bezier(0.25, 0.6, 0.3, 1) backwards;
   }
   .negstrip--a .frame:nth-child(1) {
     animation-delay: 0.1s;
