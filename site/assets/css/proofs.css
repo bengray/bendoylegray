@@ -20,7 +20,7 @@
 .sheet-head {
   padding: clamp(0.75rem, 2vw, 1.5rem) 0 clamp(2rem, 4.5vw, 3rem);
   border-bottom: 1px solid var(--paper-edge);
-  margin-top: -42px;
+  margin-top: -82px;
 }
 
 .sheet-lockup svg {
