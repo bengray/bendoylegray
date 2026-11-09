@@ -201,6 +201,13 @@
   border-color: var(--rebate);
 }
 
+.rate__blurb {
+  font-size: 0.9375rem;
+  font-style: italic;
+  color: var(--muted-hi);
+  margin-top: auto;
+}
+
 .rate__kind {
   font-family: var(--mono);
   font-size: 0.625rem;
@@ -224,17 +231,6 @@
 
 .rate__price--small {
   font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem);
-}
-
-/* the grease circle around the private-session price */
-.rate__mark {
-  position: relative;
-  display: inline-block;
-  padding: 0.1em 0.35em;
-}
-
-.rate__mark .mark {
-  stroke-dashoffset: 0;
 }
 
 .rate__body {
