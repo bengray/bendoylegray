@@ -16,21 +16,16 @@ LAYOUT
     code-less-traveled/        old site, kept as a piece -> /code-less-traveled/
     assets/css/styles.css      palette, paper, strips (shared)
     assets/css/proofs.css      proof sheet only
-    assets/js/main.js          front page: wordmark, grease marks, plate
+    assets/js/main.js          front page: wordmark, grease marks
     assets/js/proofs.js        proof sheet: builds the strips
     assets/js/vendor/          third-party (fslightbox)
     photos/                    proof sheet photos
-    photos/instagram/          written by the Instagram job, don't edit
-    instagram.json             written by the Instagram job, don't edit
     prints/                    portfolio screenshots for the-work
-    _headers                   Netlify caching rules
     robots.txt, sitemap.xml, favicon.svg, apple-touch-icon.png,
     og-image.png               the usual
 
-  scripts/instagram.mjs        fetches the latest @ben.atlarge photos
   tools/og-card-template.html  source for og-image.png (not published)
   netlify.toml                 tells Netlify to publish site/
-  .github/workflows/           the Instagram job
 
 WORKING ON IT LOCALLY
 ---------------------
@@ -61,16 +56,10 @@ Portfolio screenshots        -> site/prints/ (1600x1000 JPG):
 Code Less Traveled archive   -> no prices, no contact, noindex. Link to
                                 it WITH the trailing slash.
 
-INSTAGRAM ON THE FRONT PAGE
----------------------------
-The plate rotates through site/instagram.json: the newest 5 photos
-from @ben.atlarge, reels skipped. Every six hours a GitHub Action
-runs scripts/instagram.mjs, which rewrites that file and
-site/photos/instagram/, commits, and pushes to main. Netlify
-redeploys from the push.
-
-Secrets: IG_TOKEN (required, long-lived Instagram token) and GH_PAT
-(optional, lets the job keep IG_TOKEN refreshed so it never expires).
+HERO PHOTO ON THE FRONT PAGE
+----------------------------
+One photo, picked by hand. In index.html find "THE HERO PHOTO" and
+change the <img>: src, width/height and alt. Any file in site/photos/.
 
 SEO NOTES
 ---------

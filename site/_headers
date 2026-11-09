@@ -1,7 +1,0 @@
-# Netlify headers. The front page reads these two on every visit, and a
-# GitHub Action replaces them every few hours, so browsers must revalidate.
-/instagram.json
-  Cache-Control: no-cache
-
-/photos/instagram/latest.jpg
-  Cache-Control: no-cache
