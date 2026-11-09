@@ -3,3 +3,14 @@
 # and off the web.
 [build]
   publish = "site"
+[[redirects]]
+  from = "https://benatlarge.com/*"
+  to = "https://bendoylegray.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.benatlarge.com/*"
+  to = "https://bendoylegray.com/"
+  status = 301
+  force = true
