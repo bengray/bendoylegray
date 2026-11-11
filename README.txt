@@ -8,18 +8,25 @@ LAYOUT
 ------
   site/                        everything public; this IS the website
     index.html                 the front page            -> /
-    proofs.html                the proof sheet           -> /proofs
+    work.html                  Work with me: sessions,   -> /work
+                               prices, booking
+    proofs.html                retired; /proofs now redirects to /
+                               (see netlify.toml)
     the-work.html              portfolio                 -> /the-work
     design-engineering.html    services                  -> /design-engineering
     benjamin-gray-resume.html  résumé
     404.html                   the blank frame
     code-less-traveled/        old site, kept as a piece -> /code-less-traveled/
-    assets/css/styles.css      palette, paper, strips (shared)
-    assets/css/proofs.css      proof sheet only
-    assets/js/main.js          front page: wordmark, grease marks
-    assets/js/proofs.js        proof sheet: builds the strips
+    assets/css/site.css        front page + Work with me: palette,
+                               the ruled grid, everything
+    assets/css/styles.css      older pages only (404, the-work,
+                               design-engineering, resume)
+    assets/css/proofs.css      retired with the proof sheet
+    assets/css/home.css        retired; the old front page
+    assets/js/main.js          wordmark, footer year
+    assets/js/proofs.js        retired with the proof sheet
     assets/js/vendor/          third-party (fslightbox)
-    photos/                    proof sheet photos
+    photos/                    the photographs
     prints/                    portfolio screenshots for the-work
     robots.txt, sitemap.xml, favicon.svg, apple-touch-icon.png,
     og-image.png               the usual
@@ -35,18 +42,15 @@ WORKING ON IT LOCALLY
 
 CHANGING THINGS
 ---------------
-Colours and the strip tilt   -> :root at the top of assets/css/styles.css
-                                Past ~1.2deg the tilt stops reading
-                                as a hand and starts reading as a trick.
-Links, copy, dates           -> the page's .html directly
-Proof sheet photos           -> drop the file in site/photos/, add a line
-                                to the JSON list in proofs.html.
-                                "keeper": true circles it for good;
-                                "full" points the enlargement at a
-                                bigger export (~2000px).
-Grease marks                 -> the <svg> block of six marks lives in
-                                index.html AND proofs.html. Keep them
-                                in step if you redraw one.
+Colours, rule weight, padding -> :root at the top of assets/css/site.css
+Links, copy, prices           -> the page's .html directly
+Front page photos             -> drop the file in site/photos/, then in
+                                 index.html copy one <a class="shot ...">
+                                 block and change href, src, alt (both
+                                 places), frame number and title. The
+                                 comment above the grid explains the
+                                 row and size classes.
+                                 is-keeper + a star marks a keeper.
 Portfolio screenshots        -> site/prints/ (1600x1000 JPG):
                                   code-less-traveled.jpg
                                   crow-and-moon.jpg
@@ -59,7 +63,8 @@ Code Less Traveled archive   -> no prices, no contact, noindex. Link to
 HERO PHOTO ON THE FRONT PAGE
 ----------------------------
 One photo, picked by hand. In index.html find "THE HERO PHOTO" and
-change the <img>: src, width/height and alt. Any file in site/photos/.
+change the href, the <img> src and alt, and the title. Any file in
+site/photos/.
 
 SEO NOTES
 ---------

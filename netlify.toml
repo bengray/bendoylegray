@@ -14,3 +14,16 @@
   to = "https://bendoylegray.com/"
   status = 301
   force = true
+
+# The proof sheet was folded into the front page (Nov 2026).
+[[redirects]]
+  from = "/proofs"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/proofs.html"
+  to = "/"
+  status = 301
+  force = true

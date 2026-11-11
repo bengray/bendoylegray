@@ -143,16 +143,12 @@ a {
 
 .hero__lead {
   align-self: start;
-  margin-top: -32px; /* ... perfecttion */
 }
 
 @media (min-width: 900px) {
   .hero {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     align-items: start;
-  }
-  .hero__lead {
-    margin-top: -42px; /* ... perfecttion */
   }
 }
 

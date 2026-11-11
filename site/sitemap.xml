@@ -2,9 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://bendoylegray.com/</loc>
-    <lastmod>2026-09-26</lastmod>
+    <lastmod>2026-11-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://bendoylegray.com/work</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://bendoylegray.com/design-engineering</loc>
@@ -15,12 +21,6 @@
   <url>
     <loc>https://bendoylegray.com/the-work</loc>
     <lastmod>2026-09-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://bendoylegray.com/proofs</loc>
-    <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
