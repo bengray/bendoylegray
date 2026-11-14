@@ -1,0 +1,46 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+{#- Blog posts are added on their own. For the other pages, update the
+    lastmod dates by hand when they change. -#}
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>{{ site.url }}/</loc>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>{{ site.url }}/work</loc>
+    <lastmod>2026-11-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>{{ site.url }}/blog/</loc>
+    <lastmod>{% if collections.posts.length %}{{ collections.posts[0].date | shortDate }}{% else %}2026-11-14{% endif %}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  {%- for post in collections.posts %}
+  <url>
+    <loc>{{ site.url }}{{ post.url }}</loc>
+    <lastmod>{{ post.date | shortDate }}</lastmod>
+    <priority>0.7</priority>
+  </url>
+  {%- endfor %}
+  <url>
+    <loc>{{ site.url }}/design-engineering</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>{{ site.url }}/the-work</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>

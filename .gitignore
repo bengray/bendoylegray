@@ -4,9 +4,11 @@
 # local Netlify CLI state
 .netlify/
 
-# Node, if a script ever grows dependencies
+# Node + Eleventy
+_site/
 node_modules/
 npm-debug.log*
 
 # secrets
 .env
+.trash-eleventy/

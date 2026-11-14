@@ -1,0 +1,17 @@
+<footer class="foot cell">
+  <span>&copy; <span id="current-year"></span> Ben Doyle Gray Photography</span>
+  <span class="foot__links">
+    {%- if navKey != "photos" %}
+    <a href="/">Photographs</a>
+    {%- endif %}
+    {%- if navKey != "work" %}
+    <a href="/work">Work with me</a>
+    {%- endif %}
+    {%- if navKey != "blog" %}
+    <a href="/blog/">Blog</a>
+    {%- endif %}
+    <a href="{{ site.instagram }}">Instagram</a>
+    <a href="{{ site.substack }}">Substack</a>
+  </span>
+  <span>Developed in 2019</span>
+</footer>

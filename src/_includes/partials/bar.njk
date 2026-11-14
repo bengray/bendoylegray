@@ -1,0 +1,18 @@
+<nav class="bar" aria-label="Site">
+  {%- if navKey == "photos" %}
+  <span class="bar__mark">BDG</span>
+  {%- else %}
+  <a class="bar__mark" href="/" aria-label="Ben Doyle Gray, front page">BDG</a>
+  {%- endif %}
+  <span class="bar__grow">{{ barLabel }}</span>
+  {%- if navKey != "photos" %}
+  <a href="/">&larr; Photographs</a>
+  {%- endif %}
+  {%- if navKey != "blog" %}
+  <a href="/blog/">Blog</a>
+  {%- endif %}
+  <a href="{{ site.instagram }}" target="_blank" rel="noopener">Instagram &nearr;</a>
+  {%- if navKey != "work" %}
+  <a class="bar__go" href="/work">Work with me &rarr;</a>
+  {%- endif %}
+</nav>

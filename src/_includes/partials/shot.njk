@@ -1,0 +1,23 @@
+{#- One frame on the front page. `p` is a photo from _data/photos.json
+    (after the numberShots filter); `cls` is its size class.
+    Clicking a frame opens the whole uncropped photo. -#}
+{% macro shot(p, cls) -%}
+<a
+  class="shot {{ cls }}{% if p.keeper %} is-keeper{% endif %}"
+  href="/photos/{{ p.file }}"
+  data-fslightbox="photos"
+  data-alt="{{ p.alt }}"
+  style="--i: {{ p.i }}"
+>
+  <img
+    src="/photos/{{ p.file }}"
+    alt="{{ p.alt }}"
+    {% if p.eager %}fetchpriority="high"{% else %}loading="lazy"{% endif %}
+    decoding="async"{% if p.position %} style="object-position: {{ p.position }}"{% endif %}
+  />
+  <span class="shot__edge" aria-hidden="true"
+    ><span class="shot__num">&#9656; {{ p.frame }}{% if p.keeper %} &#9733;{% endif %}</span
+    ><span class="shot__title">{{ p.title }}</span></span
+  >
+</a>
+{%- endmacro %}

@@ -1,0 +1,85 @@
+{
+  "hero": {
+    "file": "skye-v2.jpg",
+    "frame": "1",
+    "title": "Skye",
+    "alt": "A photo of a husky with blue eyes",
+    "position": "50% 28%"
+  },
+  "rows": [
+    [
+      {
+        "file": "IMG_6185.jpg",
+        "size": "wide",
+        "frame": "1A",
+        "title": "Looking up",
+        "alt": "A photo of a dog looking up at the camera",
+        "position": "50% 40%"
+      },
+      {
+        "file": "Cosmo.jpg",
+        "size": "narrow",
+        "frame": "2",
+        "title": "Cosmo",
+        "alt": "A close-up of a dog with striking blue eyes",
+        "position": "50% 30%"
+      }
+    ],
+    [
+      {
+        "file": "two-slits.jpg",
+        "size": "five",
+        "frame": "2A",
+        "title": "Two slits",
+        "alt": "Black and white: half of a tabby cat's face seen through a narrow bright gap, one eye sharp",
+        "position": "60% 50%",
+        "keeper": true
+      },
+      {
+        "file": "good-girl.jpg",
+        "size": "seven",
+        "frame": "3",
+        "title": "Good girl",
+        "alt": "A photo of a pitbull dog with a happy expression",
+        "position": "50% 35%"
+      }
+    ],
+    [
+      {
+        "file": "terrier.jpg",
+        "size": "narrow",
+        "frame": "3A",
+        "title": "Terrier",
+        "alt": "A small white dog with floppy ears, looking up at the camera",
+        "position": "50% 25%"
+      },
+      {
+        "file": "attention.jpg",
+        "size": "wide",
+        "frame": "4",
+        "title": "Attention",
+        "alt": "A dog looking directly off camera with an attentive expression",
+        "position": "60% 40%",
+        "keeper": true
+      }
+    ],
+    [
+      {
+        "file": "lucy-maggie.jpg",
+        "size": "half",
+        "frame": "4A",
+        "title": "Lucy & Maggie",
+        "alt": "Two dogs touching noses in close profile, one tan and one black",
+        "keeper": true
+      },
+      {
+        "file": "Derby.jpg",
+        "size": "half",
+        "frame": "5",
+        "title": "Derby",
+        "alt": "A photo of my cat named Derby",
+        "position": "55% 40%"
+      }
+    ]
+  ]
+}

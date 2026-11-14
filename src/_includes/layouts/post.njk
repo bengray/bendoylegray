@@ -1,0 +1,42 @@
+---
+layout: layouts/base.njk
+navKey: blog
+barLabel: Blog
+ogType: article
+css: ["/assets/css/blog.css"]
+---
+{#- One blog post. Front matter in the post: title, description, and
+    optionally date (otherwise taken from the file name). -#}
+{%- set newer = collections.posts | getPreviousCollectionItem -%}
+{%- set older = collections.posts | getNextCollectionItem -%}
+      <header class="post-head">
+        <h1 class="post-head__title cell">{{ title }}</h1>
+        <div class="post-head__meta cell">
+          <time class="label" datetime="{{ page.date | shortDate }}">{{ page.date | readableDate }}</time>
+          {%- if description %}
+          <p class="standfirst">{{ description }}</p>
+          {%- endif %}
+        </div>
+      </header>
+
+      <article class="prose cell">
+        {{ content | safe }}
+      </article>
+
+      <nav class="post-nav" aria-label="More posts">
+        {%- if older %}
+        <a class="post-nav__link cell" href="{{ older.url }}">
+          <span class="label">&larr; Older</span>
+          <span class="post-nav__title">{{ older.data.title }}</span>
+        </a>
+        {%- endif %}
+        <a class="post-nav__link post-nav__all cell" href="/blog/">
+          <span class="label">All posts</span>
+        </a>
+        {%- if newer %}
+        <a class="post-nav__link cell" href="{{ newer.url }}">
+          <span class="label">Newer &rarr;</span>
+          <span class="post-nav__title">{{ newer.data.title }}</span>
+        </a>
+        {%- endif %}
+      </nav>

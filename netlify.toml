@@ -1,8 +1,13 @@
-# Netlify publishes site/ as-is. No build step.
-# Everything outside site/ (README, scripts/, tools/) stays in the repo
+# Netlify runs Eleventy, which builds src/ into _site/, and publishes
+# _site/. Everything outside src/ (README, tools/) stays in the repo
 # and off the web.
 [build]
-  publish = "site"
+  command = "npm run build"
+  publish = "_site"
+
+[build.environment]
+  NODE_VERSION = "22"
+
 [[redirects]]
   from = "https://benatlarge.com/*"
   to = "https://bendoylegray.com/"

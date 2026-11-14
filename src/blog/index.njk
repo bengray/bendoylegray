@@ -1,0 +1,41 @@
+---
+layout: layouts/base.njk
+permalink: /blog/index.html
+title: "Blog: Ben Doyle Gray Photography"
+description: "Notes from Ben Doyle Gray: the dogs, the sessions, and the frames behind them."
+navKey: blog
+barLabel: Blog
+css: ["/assets/css/blog.css"]
+---
+      <header class="work-head">
+        <h1 class="cell">Blog</h1>
+        <div class="work-head__body cell">
+          <p class="standfirst">
+            The dogs, the sessions, and the frames behind them.
+          </p>
+          <a class="go go--inline" href="/blog/feed.xml"
+            ><span>Follow by RSS</span><span aria-hidden="true">&nearr;</span></a
+          >
+        </div>
+      </header>
+
+      <section class="block" aria-label="Posts">
+        {%- if collections.posts.length %}
+        <ol class="entries">
+          {%- for post in collections.posts %}
+          <li>
+            <a class="entry cell" href="{{ post.url }}">
+              <span class="entry__num">&#9656; {{ collections.posts.length - loop.index0 }}</span>
+              <time class="entry__date" datetime="{{ post.date | shortDate }}">{{ post.date | readableDate }}</time>
+              <h2 class="entry__title">{{ post.data.title }}</h2>
+              {%- if post.data.description %}
+              <p class="entry__blurb">{{ post.data.description }}</p>
+              {%- endif %}
+            </a>
+          </li>
+          {%- endfor %}
+        </ol>
+        {%- else %}
+        <p class="entries__none cell label">Nothing on the roll yet.</p>
+        {%- endif %}
+      </section>

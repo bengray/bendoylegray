@@ -1,0 +1,275 @@
+/* blog.css — the blog index (/blog/) and posts (/blog/<slug>/).
+
+   Loaded after site.css and built from the same parts: paper cells on
+   the ink slab, 2px rules, the same three typefaces. Nothing new in
+   the palette. */
+
+/* ---------- the index: one ruled row per post ---------- */
+
+.entries {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--rule);
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 5rem 9rem minmax(0, 1fr);
+  grid-template-areas:
+    "num date title"
+    "num date blurb";
+  align-items: baseline;
+  gap: 0.5rem 1.5rem;
+  padding: 1.5rem var(--pad) 1.75rem;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.entry__num {
+  grid-area: num;
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  color: var(--amber-ink);
+}
+
+.entry__date {
+  grid-area: date;
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.entry__title {
+  grid-area: title;
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(2rem, 4.2vw, 3.5rem);
+  line-height: 0.92;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+}
+
+.entry__blurb {
+  grid-area: blurb;
+  color: var(--ink-soft);
+  max-width: 52ch;
+}
+
+.entry:hover {
+  background: var(--rebate);
+  color: var(--paper);
+}
+
+.entry:hover .entry__num {
+  color: var(--amber);
+}
+
+.entry:hover .entry__date,
+.entry:hover .entry__blurb {
+  color: #c6c8be;
+}
+
+@media (max-width: 40rem) {
+  .entry {
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "num date"
+      "title title"
+      "blurb blurb";
+  }
+}
+
+.entries__none {
+  padding: 2.5rem var(--pad);
+  color: var(--ink-soft);
+}
+
+/* ---------- a post: header ---------- */
+
+.post-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--rule);
+}
+
+.post-head__title {
+  flex: 7 1 26rem;
+  min-width: 0;
+  padding: clamp(1.75rem, 3.4vw, 2.5rem) var(--pad) clamp(1.5rem, 3vw, 2.25rem);
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(3rem, 7.4vw, 6.5rem);
+  line-height: 0.86;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  overflow-wrap: break-word;
+}
+
+.post-head__meta {
+  flex: 5 1 18rem;
+  min-width: 0;
+  padding: var(--pad);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.post-head__meta .label {
+  color: var(--amber-ink);
+}
+
+/* ---------- a post: the writing ----------
+   Text keeps to a readable measure; photos and rules run the full
+   width of the cell. */
+
+.prose {
+  padding: clamp(2rem, 4vw, 3.25rem) var(--pad) clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(1.125rem, 1rem + 0.35vw, 1.25rem);
+  line-height: 1.6;
+}
+
+.prose > * {
+  max-width: 40rem;
+}
+
+.prose > * + * {
+  margin-top: 1.25em;
+}
+
+.prose h2,
+.prose h3 {
+  font-family: var(--display);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.prose h2 {
+  margin-top: 2em;
+  font-size: clamp(2rem, 3.6vw, 2.75rem);
+}
+
+.prose h3 {
+  margin-top: 1.75em;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+}
+
+.prose h2 + *,
+.prose h3 + * {
+  margin-top: 0.75em;
+}
+
+.prose a {
+  color: var(--amber-ink);
+  text-underline-offset: 3px;
+}
+
+.prose a:hover {
+  color: var(--china);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.25em;
+}
+
+.prose li + li {
+  margin-top: 0.375em;
+}
+
+.prose blockquote {
+  padding-left: 1.25rem;
+  border-left: 6px solid var(--china);
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+.prose hr {
+  max-width: none;
+  border: 0;
+  border-top: var(--rule) solid var(--ink);
+  margin: 2.5em 0;
+}
+
+.prose code {
+  font-family: var(--mono);
+  font-size: 0.85em;
+}
+
+.prose pre {
+  max-width: none;
+  overflow-x: auto;
+  padding: 1rem 1.25rem;
+  background: var(--rebate);
+  color: var(--paper);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* photos: a bare image, or a <figure> with a caption */
+.prose img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.prose > p:has(> img:only-child),
+.prose > figure {
+  max-width: none;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.prose figcaption {
+  margin-top: 0.75rem;
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ---------- a post: older / all / newer ---------- */
+
+.post-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--rule);
+}
+
+.post-nav__link {
+  flex: 1 1 16rem;
+  min-height: 6rem;
+  padding: 1.25rem var(--pad);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.post-nav__all {
+  flex: 0 1 12rem;
+  align-items: center;
+  text-align: center;
+}
+
+.post-nav__title {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.75rem;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.post-nav__link:hover {
+  background: var(--rebate);
+  color: var(--amber);
+}

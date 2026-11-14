@@ -1,0 +1,28 @@
+---
+permalink: /blog/feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="{{ site.url }}/">
+  <title>Ben Doyle Gray: Blog</title>
+  <subtitle>The dogs, the sessions, and the frames behind them.</subtitle>
+  <link href="{{ site.url }}/blog/feed.xml" rel="self" />
+  <link href="{{ site.url }}/blog/" />
+  <id>{{ site.url }}/blog/</id>
+  <updated>{% if collections.posts.length %}{{ collections.posts[0].date | isoDate }}{% else %}{{ page.date | isoDate }}{% endif %}</updated>
+  <author>
+    <name>{{ site.author }}</name>
+  </author>
+  {%- for post in collections.posts %}
+  <entry>
+    <title>{{ post.data.title }}</title>
+    <link href="{{ site.url }}{{ post.url }}" />
+    <id>{{ site.url }}{{ post.url }}</id>
+    <updated>{{ post.date | isoDate }}</updated>
+    {%- if post.data.description %}
+    <summary>{{ post.data.description }}</summary>
+    {%- endif %}
+    <content type="html" xml:base="{{ site.url }}{{ post.url }}">{{ post.templateContent }}</content>
+  </entry>
+  {%- endfor %}
+</feed>

@@ -1,0 +1,138 @@
+---
+layout: layouts/base.njk
+permalink: /index.html
+title: "Ben Doyle Gray Photography: dog photographer in DuPage County, IL"
+description: "Ben Doyle Gray photographs dogs around DuPage County, Illinois. Walk-up sessions with no sitting fee, private sessions, and prints of the keepers."
+canonical: https://bendoylegray.com
+ogTitle: Ben Doyle Gray Photography
+ogDescription: "Dog photography around DuPage County. Not the breed standard; the dog in front of me."
+ogImageAlt: "The name Ben Doyle Gray set in three stacked lines beside a strip of film negative."
+navKey: photos
+barLabel: DuPage County, Illinois
+lightbox: true
+---
+{%- from "partials/shot.njk" import shot -%}
+{%- set hero = photos.hero -%}
+      <!-- ===================== name + hero ===================== -->
+      <header class="hero">
+        <div class="hero__lead cell">
+          <h1 class="sr-only">Ben Doyle Gray Photography</h1>
+          <div class="wordmark" aria-hidden="true">
+            <!-- y values sit 8 lower than the old lockup so the tops of
+                 B-E-N clear the edge of the drawing; data-height grew
+                 by the same 8. -->
+            <svg id="wm" viewBox="0 0 300 274" data-height="274">
+              <text x="0" y="76">BEN</text>
+              <text x="0" y="154">DOYLE</text>
+              <text x="0" y="233">GRAY</text>
+              <text class="wordmark__sub" x="0" y="270">PHOTOGRAPHY</text>
+            </svg>
+          </div>
+          <a class="go" href="/work"
+            ><span>Work with me</span><span aria-hidden="true">&rarr;</span></a
+          >
+        </div>
+
+        <!-- THE HERO PHOTO comes from "hero" in src/_data/photos.json. -->
+        <a
+          class="shot shot--hero"
+          href="/photos/{{ hero.file }}"
+          data-fslightbox="photos"
+          data-alt="{{ hero.alt }}"
+          style="--i: 0"
+          >
+          <img
+            src="/photos/{{ hero.file }}"
+            alt="{{ hero.alt }}"
+            fetchpriority="high"
+            decoding="async"{% if hero.position %} style="object-position: {{ hero.position }}"{% endif %}
+          />
+          <span class="shot__edge" aria-hidden="true"
+            ><span class="shot__num">&#9656; {{ hero.frame }}</span
+            ><span class="shot__title">{{ hero.title }}</span></span
+          >
+        </a>
+      </header>
+
+      <!-- ===================== the photographs =====================
+           The grid comes from "rows" in src/_data/photos.json. See the
+           README for how to add, swap or reorder frames. -->
+      <main class="photos" aria-label="Photographs">
+        {%- for row in photos.rows | numberShots %}
+        <div class="photos__row">
+          {%- for p in row %}
+          {{ shot(p, "shot--" + p.size) }}
+          {%- endfor %}
+        </div>
+        {%- endfor %}
+      </main>
+
+      <a class="band" href="/work">
+        <span class="band__what">Work with me</span>
+        <span class="label">Sessions and prints &rarr;</span>
+      </a>
+
+      <!-- ===================== elsewhere ===================== -->
+      <section class="block" aria-labelledby="else-h">
+        <div class="head cell">
+          <h2 id="else-h">Elsewhere</h2>
+          <p>Follow &middot; read &middot; write back</p>
+        </div>
+        <div class="trio">
+          <a class="out cell" href="{{ site.instagram }}" target="_blank" rel="noopener">
+            <span class="out__num">5A</span>
+            <h3 class="out__title">ben.atlarge</h3>
+            <p class="out__blurb">
+              New work first, walk-up dates first. The fastest way to know
+              where I’ll be.
+            </p>
+            <span class="out__dest">Instagram &nearr;</span>
+          </a>
+          <a class="out cell" href="{{ site.substack }}">
+            <span class="out__num">6</span>
+            <h3 class="out__title">Serial Pessimist</h3>
+            <p class="out__blurb">
+              Essays on autism, work, and institutions that weren’t built for
+              you. Written from inside it.
+            </p>
+            <span class="out__dest">Substack &nearr;</span>
+          </a>
+          <a class="out cell" href="mailto:{{ site.email }}">
+            <span class="out__num">6A</span>
+            <h3 class="out__title">Email</h3>
+            <p class="out__blurb">
+              Bookings, questions, a dog you think I should meet. I answer
+              everything, in order.
+            </p>
+            <span class="out__dest">{{ site.email }} &rarr;</span>
+          </a>
+        </div>
+      </section>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Ben Doyle Gray Photography",
+        "url": "https://bendoylegray.com",
+        "image": "https://bendoylegray.com/og-image.png",
+        "description": "Dog photography around DuPage County, Illinois. Walk-up sessions with no sitting fee, private sessions, and prints.",
+        "email": "ben@bendoylegray.com",
+        "areaServed": "DuPage County, Illinois",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Warrenville",
+          "addressRegion": "IL",
+          "addressCountry": "US"
+        },
+        "founder": {
+          "@type": "Person",
+          "name": "Ben Doyle Gray",
+          "jobTitle": "Photographer"
+        },
+        "sameAs": [
+          "https://instagram.com/ben.atlarge",
+          "https://serialpessimist.com"
+        ]
+      }
+    </script>

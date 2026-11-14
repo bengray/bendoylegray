@@ -1,0 +1,75 @@
+{#- The shell for every built page: <head>, the slab, the top bar and
+    the footer. Pages set these in their front matter:
+
+      title          <title>                       (required)
+      description    meta description              (required)
+      ogTitle        social title        (defaults to title)
+      ogDescription  social description  (defaults to description)
+      ogImageAlt     alt text for og-image.png     (optional)
+      ogType         "website" or "article"   (defaults to website)
+      canonical      full URL        (defaults to site.url + page URL)
+      navKey         "photos" | "work" | "blog": which page this is,
+                     so the bar and footer don't link to themselves
+      barLabel       the wide middle cell of the top bar
+      css            extra stylesheets, e.g. ["/assets/css/blog.css"]
+      lightbox       true to load fslightbox (front page)          -#}
+{%- set pageTitle = ogTitle or title -%}
+{%- set pageDescription = ogDescription or description -%}
+{%- set pageUrl = canonical or (site.url + page.url) -%}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ description }}" />
+    <link rel="canonical" href="{{ pageUrl }}" />
+    <meta name="theme-color" content="#e4e5e0" />
+
+    <meta property="og:type" content="{{ ogType or 'website' }}" />
+    <meta property="og:site_name" content="Ben Doyle Gray" />
+    <meta property="og:title" content="{{ pageTitle }}" />
+    <meta property="og:description" content="{{ pageDescription }}" />
+    <meta property="og:url" content="{{ pageUrl }}" />
+    <meta property="og:image" content="{{ site.ogImage }}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    {%- if ogImageAlt %}
+    <meta property="og:image:alt" content="{{ ogImageAlt }}" />
+    {%- endif %}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ pageTitle }}" />
+    <meta name="twitter:description" content="{{ pageDescription }}" />
+    <meta name="twitter:image" content="{{ site.ogImage }}" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="alternate" type="application/atom+xml" title="Ben Doyle Gray: Blog" href="/blog/feed.xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100..900&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/css/site.css" />
+    {%- for sheet in css %}
+    <link rel="stylesheet" href="{{ sheet }}" />
+    {%- endfor %}
+  </head>
+  <body>
+    <div class="slab">
+      {% include "partials/bar.njk" %}
+
+      {{ content | safe }}
+
+      {% include "partials/foot.njk" %}
+    </div>
+
+    <script src="/assets/js/main.js" defer></script>
+    {%- if lightbox %}
+    <script src="/assets/js/vendor/fslightbox.js" defer></script>
+    {%- endif %}
+  </body>
+</html>
