@@ -31,14 +31,6 @@ LAYOUT
     _includes/layouts/base.njk  <head>, top bar, footer: every built page
     _includes/layouts/post.njk  a blog post
     _includes/partials/         the top bar, the footer, one photo frame
-
-    copied across untouched (plain HTML, not built):
-    the-work.html               portfolio                  -> /the-work
-    design-engineering.html     services                   -> /design-engineering
-    benjamin-gray-resume.html   résumé
-    404.html                    the blank frame
-    proofs.html                 retired; /proofs redirects to /
-    code-less-traveled/         old site, kept as a piece  -> /code-less-traveled/
     assets/css/site.css         front page, Work with me, blog: palette,
                                 the ruled grid, everything
     assets/css/blog.css         blog index and posts only
